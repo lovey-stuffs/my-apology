@@ -1,0 +1,2968 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Please Don't Go 💔</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400;600;700&family=Lora:ital,wght@0,400;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --blush: #fce4ec;
+        --rose: #f8bbd0;
+        --deep-rose: #f48fb1;
+        --hot-pink: #ec407a;
+        --soft-pink: #fff0f3;
+        --cream: #fff8f0;
+        --gold: #d4a373;
+        --text: #5d4037;
+        --white: #ffffff;
+        --petal: #ffd6e0;
+      }
+      html {
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+      body {
+        font-family: "Lora", serif;
+        background: var(--soft-pink);
+        color: var(--text);
+        overflow-x: hidden;
+      }
+
+      /* ─── FLOATING HEARTS ─── */
+      .hearts-bg {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .floating-heart {
+        position: absolute;
+        bottom: -60px;
+        opacity: 0.12;
+        animation: floatUp linear infinite;
+      }
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) rotate(0deg) scale(1);
+          opacity: 0.12;
+        }
+        50% {
+          opacity: 0.2;
+        }
+        100% {
+          transform: translateY(-110vh) rotate(360deg) scale(0.6);
+          opacity: 0;
+        }
+      }
+
+      /* ─── SCROLL PROGRESS ─── */
+      .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--deep-rose),
+          var(--hot-pink),
+          var(--gold)
+        );
+        z-index: 1000;
+        transition: width 0.1s;
+      }
+
+      /* ─── SPARKLE CURSOR ─── */
+      .sparkle {
+        position: fixed;
+        pointer-events: none;
+        font-size: 12px;
+        z-index: 9999;
+        animation: sparkleFade 0.8s ease-out forwards;
+      }
+      @keyframes sparkleFade {
+        0% {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0) translateY(-30px);
+        }
+      }
+
+      /* ─── ENTRANCE ─── */
+      .entrance-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: linear-gradient(135deg, #fce4ec, #fff0f3, #ffd6e0);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 1.2s, visibility 1.2s;
+        text-align: center;
+        padding: 30px;
+      }
+      .entrance-overlay.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .entrance-heart {
+        font-size: 80px;
+        animation: gentlePulse 2s ease-in-out infinite;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+      .entrance-heart:hover {
+        transform: scale(1.15);
+      }
+      @keyframes gentlePulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+      .entrance-text {
+        font-family: "Caveat", cursive;
+        font-size: 32px;
+        color: var(--hot-pink);
+        margin-top: 24px;
+        opacity: 0;
+        animation: fadeInUp 1s 0.4s forwards;
+      }
+      .entrance-sub {
+        font-family: "Lora", serif;
+        font-size: 15px;
+        color: var(--deep-rose);
+        margin-top: 14px;
+        opacity: 0;
+        animation: fadeInUp 1s 0.9s forwards;
+        font-style: italic;
+        max-width: 320px;
+      }
+      .entrance-btn {
+        margin-top: 28px;
+        padding: 14px 40px;
+        font-family: "Caveat", cursive;
+        font-size: 24px;
+        background: transparent;
+        color: var(--hot-pink);
+        border: 2px solid var(--rose);
+        border-radius: 50px;
+        cursor: pointer;
+        opacity: 0;
+        animation: fadeInUp 1s 1.3s forwards;
+        transition: all 0.3s;
+      }
+      .entrance-btn:hover {
+        background: var(--hot-pink);
+        color: white;
+        border-color: var(--hot-pink);
+      }
+
+      /* ─── ANIMATIONS ─── */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.9s, transform 0.9s;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ─── HERO ─── */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 60px 24px;
+        position: relative;
+        background: linear-gradient(
+          180deg,
+          var(--soft-pink) 0%,
+          var(--blush) 50%,
+          var(--petal) 100%
+        );
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        left: -60px;
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(
+          circle,
+          rgba(244, 143, 177, 0.12),
+          transparent 70%
+        );
+        border-radius: 50%;
+        animation: drift 10s ease-in-out infinite;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: -40px;
+        right: -40px;
+        width: 280px;
+        height: 280px;
+        background: radial-gradient(
+          circle,
+          rgba(212, 163, 115, 0.08),
+          transparent 70%
+        );
+        border-radius: 50%;
+        animation: drift 7s ease-in-out infinite reverse;
+      }
+      @keyframes drift {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(25px, -25px);
+        }
+      }
+      .hero-top {
+        font-family: "Caveat", cursive;
+        font-size: 18px;
+        color: var(--hot-pink);
+        background: rgba(255, 255, 255, 0.55);
+        padding: 8px 26px;
+        border-radius: 30px;
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(244, 143, 177, 0.2);
+        margin-bottom: 24px;
+        opacity: 0;
+        animation: fadeInUp 0.8s 0.2s forwards;
+      }
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(36px, 7vw, 68px);
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1.2;
+        margin-bottom: 20px;
+        opacity: 0;
+        animation: fadeInUp 0.8s 0.5s forwards;
+      }
+      .hero h1 em {
+        font-style: italic;
+        color: var(--hot-pink);
+        position: relative;
+      }
+      .hero h1 em::after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--gold);
+        border-radius: 2px;
+        transform: scaleX(0);
+        animation: lineGrow 0.8s 1.6s forwards;
+      }
+      @keyframes lineGrow {
+        to {
+          transform: scaleX(1);
+        }
+      }
+      .hero-message {
+        font-family: "Lora", serif;
+        font-size: clamp(15px, 2.2vw, 19px);
+        font-style: italic;
+        color: var(--text);
+        opacity: 0;
+        max-width: 520px;
+        line-height: 1.8;
+        animation: fadeInUp 0.8s 0.9s forwards;
+      }
+      .scroll-cue {
+        position: absolute;
+        bottom: 36px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        opacity: 0;
+        animation: fadeInUp 0.8s 2s forwards;
+      }
+      .scroll-cue span {
+        font-family: "Caveat", cursive;
+        font-size: 16px;
+        color: var(--deep-rose);
+      }
+      .scroll-arrow {
+        width: 20px;
+        height: 20px;
+        border-right: 2px solid var(--deep-rose);
+        border-bottom: 2px solid var(--deep-rose);
+        transform: rotate(45deg);
+        animation: bounce 2s infinite;
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: rotate(45deg) translate(0, 0);
+        }
+        50% {
+          transform: rotate(45deg) translate(4px, 4px);
+        }
+      }
+
+      /* ─── SORRY ─── */
+      .sorry-section {
+        padding: 100px 24px;
+        background: linear-gradient(
+          180deg,
+          var(--petal),
+          var(--cream) 40%,
+          var(--soft-pink)
+        );
+        text-align: center;
+      }
+      .section-label {
+        font-family: "Caveat", cursive;
+        font-size: 20px;
+        color: var(--hot-pink);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(28px, 5vw, 46px);
+        margin: 8px 0 50px;
+        color: var(--text);
+        line-height: 1.3;
+      }
+      .sorry-cards {
+        max-width: 800px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      @media (max-width: 650px) {
+        .sorry-cards {
+          grid-template-columns: 1fr;
+        }
+      }
+      .sorry-card {
+        background: white;
+        border-radius: 20px;
+        padding: 32px 28px;
+        box-shadow: 0 8px 30px rgba(236, 64, 122, 0.06);
+        text-align: left;
+        transition: transform 0.4s, box-shadow 0.4s;
+        position: relative;
+        overflow: hidden;
+      }
+      .sorry-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 16px 40px rgba(236, 64, 122, 0.12);
+      }
+      .sorry-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, var(--rose), var(--hot-pink));
+      }
+      .sorry-card .card-emoji {
+        font-size: 32px;
+        margin-bottom: 12px;
+        display: block;
+      }
+      .sorry-card h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 18px;
+        color: var(--hot-pink);
+        margin-bottom: 8px;
+      }
+      .sorry-card p {
+        font-family: "Lora", serif;
+        font-size: 14px;
+        line-height: 1.75;
+        color: var(--text);
+        opacity: 0.8;
+      }
+
+      /* ─── PHOTOS ─── */
+      .meaning-section {
+        padding: 100px 24px;
+        background: linear-gradient(
+          180deg,
+          var(--soft-pink),
+          var(--blush),
+          var(--petal)
+        );
+        text-align: center;
+      }
+      .photo-row {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+      @media (max-width: 768px) {
+        .photo-row {
+          grid-template-columns: 1fr;
+          max-width: 380px;
+        }
+      }
+      .photo-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 35px rgba(236, 64, 122, 0.07);
+        transition: transform 0.5s, box-shadow 0.5s;
+      }
+      .photo-card:hover {
+        transform: translateY(-8px) rotate(-0.5deg);
+        box-shadow: 0 20px 50px rgba(236, 64, 122, 0.14);
+      }
+      .photo-card:nth-child(2) {
+        transform: translateY(18px);
+      }
+      .photo-card:nth-child(2):hover {
+        transform: translateY(10px) rotate(0.5deg);
+      }
+      .photo-frame {
+        width: 100%;
+        aspect-ratio: 3/4;
+        overflow: hidden;
+      }
+      .photo-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          var(--blush),
+          var(--rose),
+          var(--petal)
+        );
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-family: "Caveat", cursive;
+        font-size: 17px;
+        color: var(--hot-pink);
+      }
+      .photo-placeholder .cam {
+        font-size: 44px;
+        animation: gentlePulse 2.5s infinite;
+      }
+      .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s;
+      }
+      .photo-card:hover .photo-frame img {
+        transform: scale(1.06);
+      }
+      .photo-caption {
+        padding: 22px 24px 26px;
+        text-align: center;
+      }
+      .photo-caption .tag {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--blush), var(--petal));
+        padding: 4px 14px;
+        border-radius: 20px;
+        font-family: "Caveat", cursive;
+        font-size: 13px;
+        color: var(--hot-pink);
+        margin-bottom: 8px;
+      }
+      .photo-caption h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 19px;
+        color: var(--text);
+        margin-bottom: 6px;
+      }
+      .photo-caption p {
+        font-family: "Lora", serif;
+        font-size: 13.5px;
+        color: var(--text);
+        opacity: 0.75;
+        line-height: 1.65;
+      }
+
+      /* ─── EMOTION CANVAS ─── */
+      .emotion-section {
+        padding: 100px 24px;
+        background: linear-gradient(
+          180deg,
+          var(--blush),
+          var(--cream),
+          var(--petal)
+        );
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .emotion-wrapper {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      .emotion-intro {
+        background: white;
+        border-radius: 20px;
+        padding: 32px;
+        box-shadow: 0 8px 30px rgba(236, 64, 122, 0.06);
+        margin-bottom: 28px;
+      }
+      .emotion-intro p {
+        font-family: "Lora", serif;
+        font-size: 15px;
+        color: var(--text);
+        opacity: 0.8;
+        line-height: 1.7;
+      }
+      .emotion-intro p em {
+        color: var(--hot-pink);
+        font-style: italic;
+      }
+
+      .emotion-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+      }
+      .emo-btn {
+        padding: 12px 22px;
+        font-family: "Caveat", cursive;
+        font-size: 20px;
+        border: 2px solid var(--rose);
+        background: white;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.35s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .emo-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(236, 64, 122, 0.15);
+      }
+      .emo-btn.active {
+        color: white;
+        border-color: transparent;
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      }
+      .emo-btn[data-emo="angry"].active {
+        background: linear-gradient(135deg, #ef5350, #e53935);
+      }
+      .emo-btn[data-emo="sad"].active {
+        background: linear-gradient(135deg, #5c6bc0, #3f51b5);
+      }
+      .emo-btn[data-emo="confused"].active {
+        background: linear-gradient(135deg, #ab47bc, #8e24aa);
+      }
+      .emo-btn[data-emo="hopeful"].active {
+        background: linear-gradient(135deg, #ffb74d, #ff9800);
+      }
+      .emo-btn[data-emo="loved"].active {
+        background: linear-gradient(135deg, var(--hot-pink), #e91e63);
+      }
+      .emo-btn .emo-icon {
+        font-size: 22px;
+      }
+      .emo-btn .emo-check {
+        display: none;
+        font-size: 13px;
+        margin-left: 2px;
+      }
+      .emo-btn.visited .emo-check {
+        display: inline;
+      }
+
+      .emo-card {
+        display: none;
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 12px 40px rgba(236, 64, 122, 0.08);
+        border: 2px solid var(--rose);
+        animation: emoCardIn 0.6s ease forwards;
+      }
+      .emo-card.active {
+        display: block;
+      }
+      @keyframes emoCardIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      .emo-card-art {
+        width: 100%;
+        aspect-ratio: 3/2;
+        overflow: hidden;
+        position: relative;
+        background: var(--blush);
+      }
+      .emo-card-art img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        background: var(--blush);
+        transition: opacity 0.6s;
+      }
+      .emo-card-art .emo-card-loading {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--blush), var(--petal));
+        font-family: "Caveat", cursive;
+        font-size: 20px;
+        color: var(--hot-pink);
+        transition: opacity 0.4s;
+      }
+      .emo-card-art .emo-card-loading.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .emo-card-art .art-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.35) 0%,
+          transparent 50%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 20px 24px;
+      }
+      .emo-card-art .art-title {
+        font-family: "Playfair Display", serif;
+        font-size: 16px;
+        color: white;
+        font-weight: 700;
+      }
+      .emo-card-art .art-artist {
+        font-family: "Lora", serif;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.8);
+        font-style: italic;
+        margin-top: 2px;
+      }
+      .emo-card-body {
+        padding: 28px 28px 24px;
+        text-align: center;
+      }
+      .emo-card-body .emo-quote {
+        font-family: "Playfair Display", serif;
+        font-size: 18px;
+        font-style: italic;
+        color: var(--text);
+        line-height: 1.6;
+        margin-bottom: 16px;
+        position: relative;
+      }
+      .emo-card-body .emo-quote::before {
+        content: '"';
+        font-size: 48px;
+        font-family: "Playfair Display", serif;
+        color: var(--rose);
+        position: absolute;
+        top: -18px;
+        left: -6px;
+        line-height: 1;
+        opacity: 0.5;
+      }
+      .emo-card-body .emo-pamper {
+        font-family: "Caveat", cursive;
+        font-size: 19px;
+        color: var(--hot-pink);
+        line-height: 1.5;
+        padding: 14px 18px;
+        background: linear-gradient(135deg, var(--blush), var(--petal));
+        border-radius: 14px;
+      }
+
+      .emo-progress {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 24px;
+        align-items: center;
+      }
+      .emo-pip {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--blush);
+        transition: all 0.4s;
+        border: 1.5px solid var(--rose);
+      }
+      .emo-pip.filled {
+        background: var(--hot-pink);
+        border-color: var(--hot-pink);
+        transform: scale(1.25);
+      }
+      .emo-progress-label {
+        font-family: "Caveat", cursive;
+        font-size: 15px;
+        color: var(--deep-rose);
+        margin-left: 10px;
+      }
+
+      .emo-final-msg {
+        max-width: 540px;
+        margin: 28px auto 0;
+        background: white;
+        border-radius: 20px;
+        padding: 32px;
+        box-shadow: 0 8px 30px rgba(236, 64, 122, 0.07);
+        opacity: 0;
+        transform: translateY(16px);
+        transition: all 0.8s;
+        pointer-events: none;
+      }
+      .emo-final-msg.show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      .emo-final-msg .final-emoji {
+        font-size: 48px;
+        margin-bottom: 10px;
+        display: block;
+        animation: gentlePulse 2s infinite;
+      }
+      .emo-final-msg h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 24px;
+        color: var(--hot-pink);
+        margin-bottom: 10px;
+      }
+      .emo-final-msg p {
+        font-family: "Lora", serif;
+        font-size: 14.5px;
+        color: var(--text);
+        opacity: 0.8;
+        line-height: 1.7;
+      }
+      .emo-final-msg .final-sig {
+        font-family: "Caveat", cursive;
+        font-size: 20px;
+        color: var(--deep-rose);
+        margin-top: 14px;
+      }
+
+      /* ─── GAME ─── */
+      .game-section {
+        padding: 100px 24px;
+        background: linear-gradient(180deg, var(--cream), var(--soft-pink));
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .game-wrapper {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .game-intro {
+        background: white;
+        border-radius: 20px;
+        padding: 36px;
+        box-shadow: 0 8px 30px rgba(236, 64, 122, 0.08);
+        margin-bottom: 30px;
+      }
+      .game-intro p {
+        font-family: "Lora", serif;
+        font-size: 15px;
+        color: var(--text);
+        opacity: 0.8;
+        line-height: 1.7;
+        margin-bottom: 16px;
+      }
+      .game-start-btn {
+        padding: 14px 40px;
+        font-family: "Caveat", cursive;
+        font-size: 26px;
+        background: linear-gradient(135deg, var(--hot-pink), #e91e63);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 6px 20px rgba(236, 64, 122, 0.35);
+        transition: all 0.3s;
+      }
+      .game-start-btn:hover {
+        transform: scale(1.08);
+      }
+      .game-canvas-wrap {
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        height: 420px;
+        margin: 0 auto;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.5),
+          rgba(252, 228, 236, 0.4)
+        );
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(236, 64, 122, 0.1);
+        border: 2px solid var(--rose);
+        display: none;
+        touch-action: none;
+        user-select: none;
+      }
+      .game-canvas-wrap.active {
+        display: block;
+      }
+      .game-hud {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 20px;
+        font-family: "Caveat", cursive;
+        font-size: 20px;
+        color: var(--hot-pink);
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(6px);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+      }
+      .game-basket {
+        position: absolute;
+        bottom: 12px;
+        width: 70px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 42px;
+        z-index: 2;
+        transition: left 0.05s linear;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+      }
+      .game-falling-item {
+        position: absolute;
+        font-size: 30px;
+        z-index: 1;
+        pointer-events: none;
+        filter: drop-shadow(0 2px 6px rgba(236, 64, 122, 0.2));
+      }
+      .game-pop {
+        position: absolute;
+        font-family: "Caveat", cursive;
+        font-size: 18px;
+        color: var(--hot-pink);
+        font-weight: 700;
+        pointer-events: none;
+        z-index: 3;
+        animation: popUp 0.8s ease-out forwards;
+      }
+      @keyframes popUp {
+        0% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-50px) scale(1.3);
+        }
+      }
+      .game-msg-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 240, 243, 0.92);
+        backdrop-filter: blur(6px);
+        z-index: 5;
+        border-radius: 24px;
+        padding: 30px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s;
+      }
+      .game-msg-overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .game-msg-overlay h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 26px;
+        color: var(--hot-pink);
+        margin-bottom: 8px;
+      }
+      .game-msg-overlay p {
+        font-family: "Caveat", cursive;
+        font-size: 19px;
+        color: var(--text);
+        margin-bottom: 4px;
+        line-height: 1.5;
+        max-width: 360px;
+      }
+      .game-msg-overlay .final-score {
+        font-size: 48px;
+        margin: 10px 0;
+      }
+      .game-msg-overlay button {
+        margin-top: 16px;
+        padding: 12px 36px;
+        font-family: "Caveat", cursive;
+        font-size: 22px;
+        background: linear-gradient(135deg, var(--hot-pink), #e91e63);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(236, 64, 122, 0.3);
+        transition: all 0.3s;
+      }
+      .game-msg-overlay button:hover {
+        transform: scale(1.06);
+      }
+      .game-milestone {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: "Caveat", cursive;
+        font-size: 28px;
+        color: var(--hot-pink);
+        z-index: 4;
+        pointer-events: none;
+        animation: milestoneFlash 1.5s ease-out forwards;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.88);
+        padding: 12px 24px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(236, 64, 122, 0.15);
+      }
+      @keyframes milestoneFlash {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.5);
+        }
+        20% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1.1);
+        }
+        80% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(-50%, -60%) scale(0.9);
+        }
+      }
+
+      /* ─── LETTER ─── */
+      .letter-section {
+        padding: 80px 24px;
+        background: linear-gradient(180deg, var(--soft-pink), var(--cream));
+        text-align: center;
+      }
+      .letter-paper {
+        max-width: 560px;
+        margin: 30px auto 0;
+        background: white;
+        border-radius: 4px;
+        padding: 48px 40px;
+        box-shadow: 2px 3px 20px rgba(0, 0, 0, 0.05);
+        position: relative;
+        transform: rotate(-0.8deg);
+      }
+      .letter-paper::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--rose),
+          var(--hot-pink),
+          var(--gold)
+        );
+      }
+      .letter-paper p {
+        font-family: "Caveat", cursive;
+        font-size: 21px;
+        color: var(--text);
+        line-height: 1.85;
+        text-align: left;
+      }
+      .letter-paper .signature {
+        text-align: right;
+        margin-top: 24px;
+        font-size: 24px;
+        color: var(--hot-pink);
+      }
+      .letter-stamp {
+        position: absolute;
+        top: 18px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+        border: 3px solid var(--rose);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        transform: rotate(12deg);
+        opacity: 0.5;
+      }
+
+      /* ─── THE ASK ─── */
+      .stay-section {
+        padding: 100px 24px 70px;
+        background: linear-gradient(
+          180deg,
+          var(--cream),
+          #ffe0e6,
+          var(--soft-pink)
+        );
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .stay-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse at 50% 0%,
+          rgba(255, 255, 255, 0.5),
+          transparent 60%
+        );
+      }
+      .stay-card {
+        max-width: 580px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 28px;
+        padding: 50px 40px;
+        box-shadow: 0 20px 60px rgba(236, 64, 122, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+      .stay-card::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(
+          135deg,
+          var(--rose),
+          var(--hot-pink),
+          var(--gold),
+          var(--deep-rose)
+        );
+        border-radius: 30px;
+        z-index: -1;
+        animation: borderGlow 4s linear infinite;
+      }
+      @keyframes borderGlow {
+        0%,
+        100% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+      .stay-emoji {
+        font-size: 56px;
+        margin-bottom: 14px;
+        animation: gentlePulse 2s infinite;
+      }
+      .stay-card h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(26px, 5vw, 40px);
+        color: var(--text);
+        margin-bottom: 14px;
+        line-height: 1.25;
+      }
+      .stay-card h2 em {
+        color: var(--hot-pink);
+        font-style: italic;
+      }
+      .stay-text {
+        font-family: "Lora", serif;
+        font-size: 15px;
+        color: var(--text);
+        opacity: 0.8;
+        line-height: 1.8;
+        max-width: 440px;
+        margin: 0 auto 28px;
+      }
+      .stay-question {
+        font-family: "Caveat", cursive;
+        font-size: clamp(30px, 5vw, 44px);
+        color: var(--hot-pink);
+        margin-bottom: 28px;
+        animation: gentlePulse 2.5s infinite;
+      }
+      .btn-group {
+        display: flex;
+        gap: 18px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+      }
+      .btn-stay {
+        padding: 16px 44px;
+        font-family: "Caveat", cursive;
+        font-size: 26px;
+        background: linear-gradient(135deg, var(--hot-pink), #e91e63);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 6px 25px rgba(236, 64, 122, 0.4);
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-stay:hover {
+        transform: scale(1.1);
+        box-shadow: 0 10px 35px rgba(236, 64, 122, 0.5);
+      }
+      .btn-stay::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transform: translateX(-100%);
+        transition: transform 0.5s;
+      }
+      .btn-stay:hover::after {
+        transform: translateX(100%);
+      }
+      .btn-leave {
+        padding: 16px 44px;
+        font-family: "Caveat", cursive;
+        font-size: 26px;
+        background: transparent;
+        color: var(--deep-rose);
+        border: 2px solid var(--rose);
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .stay-hint {
+        font-family: "Caveat", cursive;
+        font-size: 14px;
+        color: var(--rose);
+        margin-top: 10px;
+        min-height: 20px;
+      }
+
+      /* ─── CELEBRATION ─── */
+      .celebration {
+        display: none;
+        min-height: 100vh;
+        background: linear-gradient(
+          135deg,
+          var(--soft-pink),
+          var(--blush),
+          var(--petal)
+        );
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 40px;
+      }
+      .celebration.active {
+        display: flex;
+      }
+      .celebration .big-heart {
+        font-size: 100px;
+        margin-bottom: 16px;
+        animation: heartBeat 1s infinite;
+      }
+      @keyframes heartBeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        15% {
+          transform: scale(1.25);
+        }
+        30% {
+          transform: scale(1);
+        }
+        45% {
+          transform: scale(1.15);
+        }
+      }
+      .celebration h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(32px, 6vw, 56px);
+        color: var(--hot-pink);
+        margin-bottom: 14px;
+        animation: fadeInUp 0.8s forwards;
+      }
+      .celebration p {
+        font-family: "Lora", serif;
+        font-size: 18px;
+        color: var(--text);
+        opacity: 0.8;
+        animation: fadeInUp 0.8s 0.3s both;
+        max-width: 480px;
+        line-height: 1.7;
+      }
+      .celebration .cel-sub {
+        font-family: "Caveat", cursive;
+        font-size: 24px;
+        color: var(--deep-rose);
+        margin-top: 16px;
+        animation: fadeInUp 0.8s 0.6s both;
+      }
+      .scroll-surprise {
+        display: none;
+        margin-top: 40px;
+        animation: fadeInUp 0.8s 1s both;
+        cursor: pointer;
+      }
+      .scroll-surprise p {
+        font-family: "Caveat", cursive;
+        font-size: 22px;
+        color: var(--hot-pink);
+        opacity: 1;
+        margin-bottom: 8px;
+      }
+      .scroll-surprise .scroll-arrow {
+        font-size: 28px;
+        animation: bounceDown 1.5s infinite;
+      }
+      @keyframes bounceDown {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(10px); }
+      }
+      .celebration.active .scroll-surprise {
+        display: block;
+      }
+      .surprise-section {
+        display: none;
+        padding: 80px 20px 40px;
+        text-align: center;
+        background: linear-gradient(
+          180deg,
+          var(--petal),
+          var(--soft-pink)
+        );
+      }
+      .surprise-section.active {
+        display: block;
+      }
+      .surprise-intro {
+        max-width: 600px;
+        margin: 0 auto 40px;
+      }
+      .surprise-intro h3 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(24px, 4vw, 36px);
+        color: var(--hot-pink);
+        margin-bottom: 10px;
+      }
+      .surprise-intro p {
+        font-family: "Caveat", cursive;
+        font-size: 22px;
+        color: var(--deep-rose);
+      }
+      .confetti-piece {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        z-index: 10000;
+        animation: confettiFall linear forwards;
+        pointer-events: none;
+      }
+      @keyframes confettiFall {
+        0% {
+          transform: translateY(-10vh) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(110vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+
+      /* ─── FOOTER ─── */
+      .footer {
+        padding: 40px;
+        text-align: center;
+        background: var(--soft-pink);
+      }
+      .footer p {
+        font-family: "Caveat", cursive;
+        font-size: 20px;
+        color: var(--deep-rose);
+      }
+      .footer .footer-hearts {
+        font-size: 14px;
+        letter-spacing: 4px;
+        margin-top: 8px;
+        color: var(--rose);
+      }
+
+      @media (max-width: 600px) {
+        .stay-card {
+          padding: 36px 24px;
+        }
+        .letter-paper {
+          padding: 30px 22px;
+        }
+        .btn-group {
+          flex-direction: column;
+          align-items: center;
+        }
+        .memory-item {
+          gap: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <!-- ═══════════ ENTRANCE ═══════════ -->
+    <div class="entrance-overlay" id="entrance">
+      <div class="entrance-heart" onclick="openSite()">🥺</div>
+      <p class="entrance-text">Before you go...</p>
+      <p class="entrance-sub">
+        I made this for you. It won't take long — but it means everything to me.
+        Please.
+      </p>
+      <button class="entrance-btn" onclick="openSite()">
+        I'll hear you out 💌
+      </button>
+    </div>
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <section class="hero">
+      <span class="hero-top"
+        >~ from someone who can't imagine life without you ~</span
+      >
+      <h1>I Know I<br />Messed Up,<br /><em>But Hear Me Out</em></h1>
+      <p class="hero-message">
+        I'm not going to pretend I was perfect. I wasn't. But what I feel for
+        you? That's the realest thing I've ever known. And I'm not ready to lose
+        it.
+      </p>
+      <div class="scroll-cue">
+        <span>please keep scrolling</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════ I'M SORRY ═══════════ -->
+    <section class="sorry-section">
+      <p class="section-label reveal">~ words I should've said sooner ~</p>
+      <h2 class="section-title reveal">I'm Sorry. <em>Truly.</em></h2>
+      <div class="sorry-cards">
+        <div class="sorry-card reveal">
+          <span class="card-emoji">😔</span>
+          <h3>For The Times I Wasn't Enough</h3>
+          <p>
+            For every moment I made you feel less than the incredible person you
+            are. You deserved better from me, and I see that now — clearer than
+            ever.
+          </p>
+        </div>
+        <div class="sorry-card reveal">
+          <span class="card-emoji">🤦</span>
+          <h3>For Taking You For Granted</h3>
+          <p>
+            I got so comfortable having you in my life that I forgot how rare
+            and precious that really is. The thought of losing you woke me up.
+            Hard.
+          </p>
+        </div>
+        <div class="sorry-card reveal">
+          <span class="card-emoji">💬</span>
+          <h3>For Words I Didn't Say</h3>
+          <p>
+            All the "I love you"s I swallowed. All the "you matter to me"s I
+            replaced with silence. You deserved to hear them every single day.
+          </p>
+        </div>
+        <div class="sorry-card reveal">
+          <span class="card-emoji">🔄</span>
+          <h3>For Not Changing Sooner</h3>
+          <p>
+            I know sorry means nothing without action. I'm not just saying it —
+            I'm committing to being the person you fell in love with, and then
+            some.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ WHAT YOU MEAN TO ME ═══════════ -->
+    <section class="meaning-section">
+      <p class="section-label reveal">
+        ~ Why this appology is so important for me 🥺 ~
+      </p>
+      <h2 class="section-title reveal">
+        A World Without You<br />Is Not A World I Want
+      </h2>
+      <div class="photo-row">
+        <div class="photo-card reveal">
+          <div class="photo-frame">
+            <img src="public/IMG_1.jpg" alt="Her photo" />
+          </div>
+          <div class="photo-caption">
+            <span class="tag">you are</span>
+            <h3>My Favorite Place to be</h3>
+            <p>
+              When you're around, that place becomes my comforting home. and so
+              I want your hug to be my permanent address.
+            </p>
+          </div>
+        </div>
+        <div class="photo-card reveal">
+          <div class="photo-frame">
+            <img src="public/IMG_2.JPG" alt="Her photo" />
+          </div>
+          <div class="photo-caption">
+            <span class="tag">you smile is</span>
+            <h3>Only thing I crave for most</h3>
+            <p>
+              When everything is falling apart, seeing you smile is the only
+              blessing I'll ask from god. And I want to see that smile always,
+              till the end.
+            </p>
+          </div>
+        </div>
+        <div class="photo-card reveal">
+          <div class="photo-frame">
+            <img src="public/IMG_3.jpg" alt="Her photo" />
+          </div>
+          <div class="photo-caption">
+            <span class="tag">Without you</span>
+            <h3>My life is just blank space</h3>
+            <p>
+              You are like raninbow pallatte to my blank canvas and I want to
+              preserve those coulours forever.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- emotion section moved to after celebration -->
+
+    <!-- ═══════════ GAME ═══════════ -->
+    <section class="game-section">
+      <p class="section-label reveal">
+        ~ one more thing before the big question ~
+      </p>
+      <h2 class="section-title reveal">
+        Can You Catch<br />What I Keep Dropping? 💘
+      </h2>
+      <div class="game-wrapper reveal">
+        <div class="game-intro" id="gameIntro">
+          <p>
+            I keep letting my love slip through the cracks. Help me prove I
+            won't do it again — catch the falling hearts and dodge the
+            heartbreaks. Get 15 to unlock a secret message... 🥺
+          </p>
+          <button class="game-start-btn" onclick="startGame()">
+            I'll Try 🎮
+          </button>
+        </div>
+        <div class="game-canvas-wrap" id="gameCanvas">
+          <div class="game-hud">
+            <span>Hearts: <span id="gameScore">0</span>/15</span>
+            <span>Lives: <span id="gameLives">♥♥♥</span></span>
+            <span>⏱ <span id="gameTimer">30</span>s</span>
+          </div>
+          <div class="game-basket" id="gameBasket">🧺</div>
+          <div class="game-msg-overlay" id="gameOverlay">
+            <div class="final-score" id="gameOverEmoji">💖</div>
+            <h3 id="gameOverTitle">Title</h3>
+            <p id="gameOverMsg">msg</p>
+            <p
+              id="gameOverSecret"
+              style="
+                font-family: 'Lora', serif;
+                font-size: 14px;
+                color: var(--text);
+                max-width: 340px;
+                line-height: 1.6;
+                opacity: 0.85;
+              "
+            ></p>
+            <button onclick="restartGame()">Try Again 🔄</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ LOVE LETTER ═══════════ -->
+    <section class="letter-section">
+      <p class="section-label reveal">
+        ~ from the deepest corner of my heart ~
+      </p>
+      <h2 class="section-title reveal">
+        A Letter I Should've<br />Written Long Ago
+      </h2>
+      <div class="letter-paper reveal">
+        <div class="letter-stamp">💌</div>
+        <p>
+          Dear my everything,<br /><br />
+          I know I don't have the right to ask you for anything. I know that.
+          But I'm asking anyway — because you're worth trying till my last
+          breath.<br /><br />
+          I was careless with the most precious thing in my life. You. And I
+          can't live with that regret forever.<br /><br />
+          You didn't just make my days better — you made ME better. Without you,
+          I'm just... like black and white newspaper. You actually put LIFE to
+          my life by making it full colourful movie playing on IMAX.
+          <br /><br />
+          I'm not asking you to forget what happened. I'm asking you to let me
+          spend every day after this proving I've learned. Proving you're my
+          priority. Not with words this time — with everything I do.<br /><br />
+          Because a life without you in it? That's not a life I want to live.
+        </p>
+        <p class="signature">— Yours, if you'll still have me 💕</p>
+      </div>
+    </section>
+
+    <!-- ═══════════ THE ASK ═══════════ -->
+    <section class="stay-section" id="staySection">
+      <p class="section-label reveal">~ the only thing that matters ~</p>
+      <div class="stay-card reveal">
+        <div class="stay-emoji">🥺💕</div>
+        <h2>I know I don't deserve it,<br />but <em>I'm asking anyway</em></h2>
+        <p class="stay-text">
+          Not because I think I'm entitled to another chance. But because what
+          we have — what we ARE together — is worth fighting for. And I will
+          fight for it every single day if you let me.
+        </p>
+        <div class="stay-question">Will you stay? 🤍</div>
+        <div class="btn-group">
+          <button class="btn-stay" onclick="sheStayed()">I'll stay 💖</button>
+          <button class="btn-leave" id="btnLeave">I need to think...</button>
+        </div>
+        <p class="stay-hint" id="leaveHint"></p>
+      </div>
+    </section>
+
+    <div class="footer">
+      <p>Made with tears, regret, and a whole lot of love 💻💕</p>
+      <p class="footer-hearts">♥ ♥ ♥ ♥ ♥</p>
+    </div>
+
+    <!-- ═══════════ CELEBRATION ═══════════ -->
+    <div class="celebration" id="celebration">
+      <div class="big-heart">💖</div>
+      <h2>Thank You For Staying</h2>
+      <p>
+        I promise — this time will be different. Not because I say it, but
+        because I'll show you. Every single day. You won't regret this.
+      </p>
+      <p class="cel-sub">
+        I love you. More than this website could ever say. 🥹
+      </p>
+      <div class="scroll-surprise" onclick="document.getElementById('surpriseSection').scrollIntoView({behavior:'smooth'})">
+        <p>Scroll for a surprise 🎁</p>
+        <div class="scroll-arrow">↓</div>
+      </div>
+    </div>
+
+    <!-- ═══════════ SURPRISE – EMOTION CANVAS ═══════════ -->
+    <div class="surprise-section" id="surpriseSection">
+      <div class="surprise-intro">
+        <h3>Since you're staying, here's a surprise for you 🎨</h3>
+        <p>~ for the artist in you ~</p>
+      </div>
+
+      <section class="emotion-section" style="display:block; padding-top:0;">
+        <h2 class="section-title">
+          What Are You<br />Feeling Right Now? 🎨
+        </h2>
+        <div class="emotion-wrapper">
+          <div class="emotion-intro">
+            <p>
+              I know you feel things deeper than most people — and that's one of
+              the most beautiful things about you. So tap on whatever you're
+              feeling right now. Each emotion will show you
+              <em>a masterpiece that mirrors it</em>, and a little something from
+              me to remind you — every feeling you have is valid, and I'm here for
+              all of them. Tap again for a new artwork!
+            </p>
+          </div>
+
+          <div class="emotion-buttons" id="emotionBtns">
+            <button class="emo-btn" data-emo="angry" onclick="triggerEmotion(this)">
+              <span class="emo-icon">😤</span> Angry
+              <span class="emo-check">✓</span>
+            </button>
+            <button class="emo-btn" data-emo="sad" onclick="triggerEmotion(this)">
+              <span class="emo-icon">😢</span> Sad
+              <span class="emo-check">✓</span>
+            </button>
+            <button class="emo-btn" data-emo="confused" onclick="triggerEmotion(this)">
+              <span class="emo-icon">😕</span> Confused
+              <span class="emo-check">✓</span>
+            </button>
+            <button class="emo-btn" data-emo="hopeful" onclick="triggerEmotion(this)">
+              <span class="emo-icon">🌤️</span> Hopeful
+              <span class="emo-check">✓</span>
+            </button>
+            <button class="emo-btn" data-emo="loved" onclick="triggerEmotion(this)">
+              <span class="emo-icon">💖</span> Loved
+              <span class="emo-check">✓</span>
+            </button>
+          </div>
+
+          <div class="emo-card" id="emoCard">
+            <div class="emo-card-art">
+              <img id="emoArtImg" src="" alt="Artwork" />
+              <div class="emo-card-loading" id="emoLoading">
+                <span>Finding you a masterpiece... 🎨</span>
+              </div>
+              <div class="art-overlay">
+                <span class="art-title" id="emoArtTitle"></span>
+                <span class="art-artist" id="emoArtArtist"></span>
+              </div>
+            </div>
+            <div class="emo-card-body">
+              <p class="emo-quote" id="emoQuote"></p>
+              <p class="emo-pamper" id="emoPamper"></p>
+            </div>
+          </div>
+
+          <div class="emo-progress" id="emoPips">
+            <div class="emo-pip" data-pip="angry"></div>
+            <div class="emo-pip" data-pip="sad"></div>
+            <div class="emo-pip" data-pip="confused"></div>
+            <div class="emo-pip" data-pip="hopeful"></div>
+            <div class="emo-pip" data-pip="loved"></div>
+            <span class="emo-progress-label" id="emoProgressLabel">0 of 5 felt</span>
+          </div>
+
+          <div class="emo-final-msg" id="emoFinalMsg">
+            <span class="final-emoji">🌸</span>
+            <h3>You Felt Everything — And That's Art</h3>
+            <p>
+              Anger. Sadness. Confusion. Hope. Love. You carry all of it, and
+              somehow you still show up in this world with grace. That's not just
+              strength — that's the most beautiful masterpiece I've ever seen. And
+              it's you.
+            </p>
+            <p class="final-sig">
+              Every emotion you have is safe with me. Always. 🤍
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      // ─── ENTRANCE ───
+      function openSite() {
+        document.getElementById("entrance").classList.add("hidden");
+      }
+
+      // ─── FLOATING HEARTS ───
+      const heartsBg = document.getElementById("heartsBg");
+      const hC = ["♥", "♡", "💕", "💗", "❤", "💖", "🩷"];
+      for (let i = 0; i < 22; i++) {
+        const h = document.createElement("span");
+        h.className = "floating-heart";
+        h.textContent = hC[Math.floor(Math.random() * hC.length)];
+        h.style.left = Math.random() * 100 + "%";
+        h.style.animationDuration = 9 + Math.random() * 14 + "s";
+        h.style.animationDelay = Math.random() * 16 + "s";
+        h.style.fontSize = 14 + Math.random() * 18 + "px";
+        heartsBg.appendChild(h);
+      }
+
+      // ─── SPARKLE CURSOR ───
+      let lastS = 0;
+      document.addEventListener("mousemove", (e) => {
+        if (Date.now() - lastS < 120) return;
+        lastS = Date.now();
+        const s = document.createElement("span");
+        s.className = "sparkle";
+        s.textContent = ["✦", "✧", "⋆", "♡", "*"][
+          Math.floor(Math.random() * 5)
+        ];
+        s.style.left = e.clientX + "px";
+        s.style.top = e.clientY + "px";
+        s.style.color = ["#f48fb1", "#ec407a", "#d4a373", "#fce4ec"][
+          Math.floor(Math.random() * 4)
+        ];
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 800);
+      });
+
+      // ─── SCROLL PROGRESS ───
+      window.addEventListener("scroll", () => {
+        const p =
+          (window.scrollY / (document.body.scrollHeight - window.innerHeight)) *
+          100;
+        document.getElementById("scrollProgress").style.width = p + "%";
+      });
+
+      // ─── REVEAL ───
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e, i) => {
+            if (e.isIntersecting)
+              setTimeout(() => e.target.classList.add("visible"), i * 100);
+          });
+        },
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
+
+      // ═══════════ EMOTION CANVAS (API-POWERED) ═══════════
+      let emoVisited = new Set();
+
+      // Search keywords for Art Institute of Chicago API per emotion
+      const emoSearchTerms = {
+        angry: [
+          "angry",
+          "anger",
+          "rage",
+          "fury",
+          "wrath",
+          "outrage",
+          "storm",
+          "fire",
+          "flames",
+          "thunder",
+          "lightning",
+          "volcano",
+          "destruction",
+          "chaos",
+          "fierce",
+          "violent",
+          "turmoil",
+          "tempest",
+          "conflict",
+          "aggression",
+          "scream",
+        ],
+        sad: [
+          "sad",
+          "sadness",
+          "sorrow",
+          "grief",
+          "tears",
+          "weeping",
+          "mourning",
+          "loss",
+          "loneliness",
+          "melancholy",
+          "despair",
+          "heartbreak",
+          "rain",
+          "abandoned",
+          "farewell",
+          "solitude",
+          "gloom",
+          "suffering",
+          "misery",
+          "anguish",
+        ],
+        confused: [
+          "confused",
+          "confusion",
+          "maze",
+          "labyrinth",
+          "fog",
+          "mist",
+          "illusion",
+          "puzzle",
+          "disoriented",
+          "surreal",
+          "distortion",
+          "blur",
+          "tangled",
+          "lost",
+          "uncertain",
+          "chaos",
+          "dizzy",
+          "fragmented",
+          "paradox",
+          "bewildered",
+        ],
+        hopeful: [
+          "hope",
+          "hopeful",
+          "sunrise",
+          "dawn",
+          "spring",
+          "bloom",
+          "rainbow",
+          "light",
+          "new beginning",
+          "growth",
+          "blossom",
+          "horizon",
+          "morning",
+          "bright",
+          "optimism",
+          "renewal",
+          "seedling",
+          "aspiration",
+          "promise",
+          "faith",
+          "uplifting",
+        ],
+        loved: [
+          "love",
+          "loved",
+          "embrace",
+          "kiss",
+          "romance",
+          "heart",
+          "affection",
+          "warmth",
+          "tenderness",
+          "devotion",
+          "passion",
+          "intimacy",
+          "couple",
+          "holding hands",
+          "caress",
+          "adoration",
+          "cherish",
+          "togetherness",
+        ],
+      };
+
+      // 100 quotes per emotion (pampering tone)
+      const emoQuotes = {
+        angry: [
+          {
+            q: "Even the stormiest seas eventually find their shore.",
+            p: "Your anger is valid. You have every right to feel it. But baby, even storms create the most breathtaking skies afterward. And I'll wait for you through every wave. 🌊",
+          },
+          {
+            q: "Fire destroys, but it also forges the strongest steel.",
+            p: "Be angry. Let it out. But know that when the flames settle, I'll be right here — fireproof and ready to rebuild everything. 🔥",
+          },
+          {
+            q: "Thunder is just the sky processing its emotions.",
+            p: "You don't need to be quiet about your pain. Be loud. Be fierce. I can take it — because I'd rather face your storm than live without your sunshine. ⛈️",
+          },
+          {
+            q: "The ocean doesn't apologize for its waves.",
+            p: "Don't apologize for feeling too much. Your intensity is what makes you extraordinary. I just need to learn to sail better. 🌊",
+          },
+          {
+            q: "Even volcanoes rest after they erupt.",
+            p: "Let it all out, every bit of it. I'll still be standing here when the dust settles, because you're worth every tremor. 🌋",
+          },
+          {
+            q: "Lightning doesn't ask permission to strike.",
+            p: "Your fury? It's powerful. It's raw. It's real. And I respect it because it shows how much you cared. How much you still care. ⚡",
+          },
+          {
+            q: "The wildest rivers carve the most beautiful canyons.",
+            p: "Your fierce emotions aren't destruction — they're creation. They carved a space in my heart that nobody else could ever fill. 💪",
+          },
+          {
+            q: "A storm is nature's way of saying 'I have something to say.'",
+            p: "I'm listening now. Really listening. Not to respond — just to hear you. Because your voice matters more than my comfort. 🌧️",
+          },
+          {
+            q: "Rage is just love with nowhere safe to land.",
+            p: "I should have been your safe landing. I wasn't. But I'm building that runway now, with my bare hands if I have to. 🥺",
+          },
+          {
+            q: "The strongest trees grow in the fiercest winds.",
+            p: "Every fight, every frustration — it didn't break you. It made you stronger. And I'm in awe of your strength, even when it's directed at me. 🌳",
+          },
+          {
+            q: "Behind every angry heart is a heart that loved too hard.",
+            p: "I see the love behind your anger. I always did. I just didn't honor it the way I should have. That changes now. 💔➡️💖",
+          },
+          {
+            q: "Fire doesn't burn to be cruel — it burns because that's its nature.",
+            p: "Your passion isn't a flaw. It's your superpower. I was just too blind to see it. Now I see nothing else. 🔥",
+          },
+          {
+            q: "Even the angriest sunset gives way to stars.",
+            p: "Right now everything feels red and burning. But I promise — the sky always softens. And so will this. Together. ✨",
+          },
+          {
+            q: "A tempest proves the ship was built to survive.",
+            p: "We've been through the worst of it. And we're still here. That has to mean something. 🚢",
+          },
+          {
+            q: "Clash, crash, roar — even chaos has its own beauty.",
+            p: "Your emotions in full force? They terrify me and mesmerize me at the same time. You're a masterpiece even when you're on fire. 🎆",
+          },
+          {
+            q: "You can't have a rainbow without a little storm first.",
+            p: "I know I caused this storm. But maybe — just maybe — what comes after will be the most colorful thing we've ever seen. 🌈",
+          },
+          {
+            q: "Fury is the sound of a heart that refused to be silenced.",
+            p: "Thank you for not going quiet. Thank you for still caring enough to be angry. Silence would have broken me. 📢",
+          },
+          {
+            q: "Earthquakes reshape the land into something new.",
+            p: "Maybe this shaking is what we needed. Not to fall apart — but to rearrange into something better than before. 🌍",
+          },
+          {
+            q: "The sword is only tempered through fire.",
+            p: "This heat between us? It's not the end. It's the forging. We're becoming something unbreakable. ⚔️",
+          },
+          {
+            q: "Storms don't last forever, but their lessons do.",
+            p: "I'm taking notes. Every word you've said in anger — I'm carrying it. Not as guilt, but as a map to being better. 📝",
+          },
+          {
+            q: "The most passionate artists were often the angriest.",
+            p: "Your fire is your art. Don't ever let anyone — especially not me — make you think it's too much. You're exactly enough. 🎨",
+          },
+          {
+            q: "A roaring sea is still magnificent.",
+            p: "Even at your angriest, you take my breath away. That's not a line — that's just the truth. 🌊",
+          },
+          {
+            q: "Sparks fly where souls collide.",
+            p: "Our friction isn't failure. It's proof that we matter to each other too much to be indifferent. 💥",
+          },
+          {
+            q: "Unspoken anger turns to stone. Spoken anger turns to sand.",
+            p: "Let it out. Every word. I'd rather stand in your sandstorm than watch you turn to stone. 🏜️",
+          },
+          {
+            q: "Dragons breathe fire, but they also guard treasure.",
+            p: "Your fierceness protects the most beautiful heart I've ever known. I just need to stop being the thing you need protecting from. 🐉",
+          },
+          {
+            q: "Passion and fury share the same heartbeat.",
+            p: "You feel angry because you feel everything — deeply, fully, completely. That's not a flaw. That's why I fell in love with you. ❤️‍🔥",
+          },
+          {
+            q: "The hottest fires leave behind the purest gold.",
+            p: "When this cools down — and it will — what's left will be pure. I believe that. I need you to believe it too. ✨",
+          },
+          {
+            q: "A hurricane has the gentlest eye at its center.",
+            p: "I know that inside all this fury, your heart is still soft. Still kind. Still the heart I fell for. I haven't forgotten. 🌀",
+          },
+          {
+            q: "Broken plates make the most beautiful mosaics.",
+            p: "Every shattered moment between us? I want to pick up every piece and turn it into something beautiful. With you. 🪞",
+          },
+          {
+            q: "You burn bright because you're made of stars.",
+            p: "Your fire isn't destructive — it's cosmic. You're not falling apart. You're supernova-ing. And it's magnificent. ⭐",
+          },
+          {
+            q: "Thunder shakes the ground but never cracks the sky.",
+            p: "Your anger shakes me to my core. But it won't break us. Nothing will. I won't let it. 🌩️",
+          },
+          {
+            q: "A geyser erupts because the pressure was held too long.",
+            p: "I'm sorry I made you hold it all in. You should never have to bottle yourself up for anyone — least of all for me. 💨",
+          },
+          {
+            q: "Iron sharpens iron.",
+            p: "You challenge me. You push me. And even though it's uncomfortable, it's making me someone worthy of you. Thank you. ⚒️",
+          },
+          {
+            q: "The warrior's cry is the most honest sound.",
+            p: "When you're angry, you're raw. Unfiltered. Honest. And I'd rather have your honest fury than anyone else's comfortable silence. 🗡️",
+          },
+          {
+            q: "Volcanoes create new islands.",
+            p: "From all this eruption, maybe we're building something entirely new. Something neither of us expected. Something better. 🏝️",
+          },
+          {
+            q: "Wild horses can't be tamed — and they shouldn't be.",
+            p: "I never want to tame your spirit. I just want to run beside it. At whatever pace you set. 🐎",
+          },
+          {
+            q: "There is electricity in your defiance.",
+            p: "Your resistance isn't stubbornness — it's self-respect. And I admire it even when it's aimed at me. ⚡",
+          },
+          {
+            q: "Tornadoes touch down where hot and cold collide.",
+            p: "We're fire and ice sometimes. But that collision? It's not destruction. It's weather. And weather always passes. 🌪️",
+          },
+          {
+            q: "A candle flame is gentle. A wildfire demands attention.",
+            p: "You demand attention. You demand respect. You demand love. And you deserve every ounce of all three. 🕯️",
+          },
+          {
+            q: "Crashing waves polish the roughest stones smooth.",
+            p: "Every wave of your anger is smoothing out my rough edges. I'm becoming better because of you — even in your fury. 🪨",
+          },
+        ],
+        sad: [
+          {
+            q: "The heaviest rains grow the most beautiful gardens.",
+            p: "I know you're hurting, and I know I caused some of it. Your tears aren't weakness — they're proof of how deeply you love. 💧",
+          },
+          {
+            q: "Even the moon has phases where it disappears.",
+            p: "It's okay to not shine right now. You'll glow again. And until then, I'll be your sky — holding space for you in the dark. 🌙",
+          },
+          {
+            q: "Tears are just the heart's way of speaking when words fail.",
+            p: "You don't have to explain your sadness. I can feel it. And I'm here — not to fix it, but to sit in it with you. 🤍",
+          },
+          {
+            q: "The deepest oceans hold the most breathtaking life.",
+            p: "Your depth of feeling is what makes you extraordinary. Please don't ever apologize for feeling too much. 🌊",
+          },
+          {
+            q: "Even willow trees weep — and they're the most graceful of all.",
+            p: "Your sadness doesn't make you weak. It makes you the most real, most human, most beautiful person in any room. 🌿",
+          },
+          {
+            q: "Winter always melts into spring.",
+            p: "This cold season you're in? It won't last. And when spring comes, I want to be standing in the warmth with you. 🌷",
+          },
+          {
+            q: "Stars can only be seen in darkness.",
+            p: "Maybe you can't see it now, but you're shining — even through the tears. Especially through the tears. ⭐",
+          },
+          {
+            q: "The violin's saddest notes are also its most beautiful.",
+            p: "Your sorrow has a melody. It's heartbreaking and stunning all at once. Just like you. 🎻",
+          },
+          {
+            q: "Clouds cry so the earth can bloom.",
+            p: "Your pain isn't pointless. Something beautiful is growing from it — I can feel it. We just have to wait. 🌧️",
+          },
+          {
+            q: "A pearl is born from an oyster's pain.",
+            p: "The most precious things come from the hardest moments. You are the pearl. You've always been the pearl. 🦪",
+          },
+          {
+            q: "Rivers wouldn't exist without the rain.",
+            p: "Every tear you've cried has carved a path — toward healing, toward us, toward something real. 💙",
+          },
+          {
+            q: "The lotus grows in mud.",
+            p: "From the messiest, muddiest parts of life, you still bloom. That's not luck — that's who you are. 🪷",
+          },
+          {
+            q: "Fog lifts. It always lifts.",
+            p: "I know you can't see clearly right now. But I can see you. And you're still the most beautiful thing in my world. 🌫️",
+          },
+          {
+            q: "Sunsets are proof that endings can be gorgeous.",
+            p: "Even if something is ending, it doesn't mean it wasn't extraordinary. But I'm not ready for our sunset. Are you? 🌅",
+          },
+          {
+            q: "The bravest thing is to feel and not run away.",
+            p: "You're sitting with your pain instead of numbing it. Do you know how incredibly brave that is? I'm in awe of you. 💪",
+          },
+          {
+            q: "Snowflakes are fragile alone, but together they blanket the world.",
+            p: "You feel fragile right now. But you're not alone. Lean on me. Together we can cover any darkness. ❄️",
+          },
+          {
+            q: "Every masterpiece was painted with some shade of blue.",
+            p: "Your sadness isn't ruining our canvas. It's adding depth to it. And depth is what turns paintings into masterpieces. 🎨",
+          },
+          {
+            q: "The quietest rooms hold the loudest echoes.",
+            p: "Your silence speaks louder than any argument. I hear it. And it's breaking my heart in all the right ways. 🤫",
+          },
+          {
+            q: "Broken crayons still color.",
+            p: "You might feel broken. But you still light up every room, every conversation, every moment you're in. That hasn't changed. 🖍️",
+          },
+          {
+            q: "The moon doesn't need to be full to be beautiful.",
+            p: "You don't need to be 'okay' to be worthy of love. You're worthy right now, exactly as you are, tears and all. 🌘",
+          },
+          {
+            q: "Raindrops are just clouds being vulnerable.",
+            p: "Your vulnerability isn't weakness — it's trust. And I will never betray that trust again. 🌧️",
+          },
+          {
+            q: "Autumn leaves fall so new ones can grow.",
+            p: "Letting go hurts. But sometimes it's the only way to make room for something even more beautiful. 🍂",
+          },
+          {
+            q: "Even the sea has low tides.",
+            p: "You're at low tide right now. But the ocean always comes back. And so will your joy. I know it. 🌊",
+          },
+          {
+            q: "A candle melts as it gives light to others.",
+            p: "You've been giving so much of yourself to everyone — to me — and you forgot to save some for yourself. I see that now. 🕯️",
+          },
+          {
+            q: "The deepest wounds heal into the strongest skin.",
+            p: "What we're going through right now? It's going to make us unbreakable. If we choose to heal together. 🩹",
+          },
+          {
+            q: "Dew on a flower petal is just the morning crying for its beauty.",
+            p: "Nature itself would weep at how beautiful you are — inside and out. Even when you can't see it. 🌸",
+          },
+          {
+            q: "Shadows prove the existence of light.",
+            p: "Your sadness proves your capacity for immense joy. You'll feel it again. I'll make sure of it. 🌤️",
+          },
+          {
+            q: "Old songs sound sadder when the memories change.",
+            p: "I know our songs hit different now. But they're still our songs. And I want to make new ones with you. 🎵",
+          },
+          {
+            q: "You are an ocean — deep, vast, and worthy of wonder.",
+            p: "People only see the surface. But I've dived deep. And what I found there? I could never leave it behind. 🐚",
+          },
+          {
+            q: "Gentle hearts carry the heaviest weight.",
+            p: "You carry everyone's feelings — including mine. It's time someone carried yours. Let me. Please. 🫂",
+          },
+          {
+            q: "A butterfly's cocoon is just a beautiful breakdown.",
+            p: "You're not falling apart. You're transforming. And what comes out the other side will take both our breaths away. 🦋",
+          },
+          {
+            q: "Soft things leave the deepest impressions.",
+            p: "Your gentleness has left a permanent imprint on my heart. No amount of pain can erase that. Never. 🤍",
+          },
+          {
+            q: "Still waters run the deepest.",
+            p: "You may look calm on the outside, but I know what's happening beneath. I see you. All of you. 💙",
+          },
+          {
+            q: "Every raindrop was once part of the ocean.",
+            p: "You'll find your way back — to yourself, to happiness, to us. Water always finds its way home. 🏠",
+          },
+          {
+            q: "The most beautiful poetry was written in tears.",
+            p: "Your sadness is poetry. Your pain is art. And I am honored that you trust me enough to show me both. ✍️",
+          },
+          {
+            q: "Night is just the sky resting before the sunrise.",
+            p: "Rest. Cry. Feel. And when you're ready, the sun will be right there — and so will I. 🌅",
+          },
+          {
+            q: "Glass is most beautiful when light passes through its fractures.",
+            p: "Your cracks? They're not flaws. They're where the light gets in. And you radiate. 💎",
+          },
+          {
+            q: "A hug can say what a thousand words cannot.",
+            p: "I wish I could reach through this screen and hold you. Until then, imagine my arms around you. Tight. Not letting go. 🤗",
+          },
+          {
+            q: "Some flowers only bloom in the rain.",
+            p: "You are that flower. The rain doesn't diminish you — it awakens you. 🌺",
+          },
+          {
+            q: "Your tears water the seeds of tomorrow.",
+            p: "Every cry is planting something new. Something hopeful. And one day soon, we'll look at what grew and smile. 🌱",
+          },
+        ],
+        confused: [
+          {
+            q: "Even Van Gogh painted crooked walls and called it home.",
+            p: "It's okay to not have all the answers right now. Confusion just means your heart is still processing. Take all the time you need. I'm not going anywhere. 💜",
+          },
+          {
+            q: "Lost paths lead to the most unexpected destinations.",
+            p: "You don't need to know where we're going right now. Just know that wherever you end up, I want to be there too. 🗺️",
+          },
+          {
+            q: "The caterpillar doesn't understand wings either.",
+            p: "You're in the messy middle. The part where nothing makes sense yet. But transformation is always confusing before it's beautiful. 🦋",
+          },
+          {
+            q: "Fog is just the sky thinking.",
+            p: "Your mind is foggy because it's processing something big. That's not weakness — that's wisdom in motion. 🌫️",
+          },
+          {
+            q: "Even compasses spin before finding north.",
+            p: "You'll find your direction. And if you need a hand to hold while you're spinning, mine is right here. 🧭",
+          },
+          {
+            q: "Puzzles don't come pre-assembled — that's what makes them worth solving.",
+            p: "We're a puzzle. Some pieces feel wrong right now. But I believe we fit. We just need to try a different angle. 🧩",
+          },
+          {
+            q: "Stars look like chaos until you learn the constellations.",
+            p: "Right now everything feels scattered. But step back, and you might see a pattern — one that leads back to us. ✨",
+          },
+          {
+            q: "The most interesting books have plot twists.",
+            p: "This chapter is confusing. But it's not the last chapter. And I have a feeling the ending is better than either of us expects. 📖",
+          },
+          {
+            q: "Rivers don't flow in straight lines — and they still reach the sea.",
+            p: "Your journey doesn't have to be linear. Meander. Wander. I'll be at the shore, waiting. 🏞️",
+          },
+          {
+            q: "Abstract art doesn't need to make sense to move you.",
+            p: "Your feelings don't need to make sense right now. They just need to be felt. And I'll honor every single one. 🎨",
+          },
+          {
+            q: "Twilight isn't day or night — it's both. And it's the most beautiful hour.",
+            p: "You're caught between two feelings. That in-between space? It's not limbo. It's where the magic happens. 🌆",
+          },
+          {
+            q: "Mazes have dead ends, but they always have an exit too.",
+            p: "Feel stuck? That's okay. Every dead end is just a turn away from the right path. And I'll walk every turn with you. 🔄",
+          },
+          {
+            q: "Clouds don't know their shape — but we still find pictures in them.",
+            p: "You don't need to define yourself right now. Just be. I'll see beauty in whatever shape you take. ☁️",
+          },
+          {
+            q: "The most honest answer is sometimes 'I don't know.'",
+            p: "You don't have to decide anything today. Not about us, not about anything. Just breathe. That's enough for now. 🫁",
+          },
+          {
+            q: "Kaleidoscopes are beautiful because nothing stays still.",
+            p: "Your shifting feelings aren't instability — they're complexity. And I fell in love with every facet of you. 🔮",
+          },
+          {
+            q: "A question mark is just an answer that hasn't arrived yet.",
+            p: "Every question you have right now? The answer is coming. And I hope — with everything in me — that I'm part of it. ❓",
+          },
+          {
+            q: "Mixed paint creates colors that didn't exist before.",
+            p: "Your confusion is creating something new. Something that hasn't existed before. And that's kind of incredible. 🎨",
+          },
+          {
+            q: "The most beautiful music lives in the space between notes.",
+            p: "You're in the pause right now. The silence between beats. But the melody isn't over. Not even close. 🎶",
+          },
+          {
+            q: "Seeds don't know they'll be flowers.",
+            p: "You can't see what you're becoming yet. But I can feel it. And it's going to be extraordinary. 🌱",
+          },
+          {
+            q: "Every path looks uncertain in the fog — until you take a step.",
+            p: "You don't need to see the whole road. Just the next step. I'll walk it with you. 👣",
+          },
+          {
+            q: "Constellations were once just scattered stars.",
+            p: "Right now your thoughts feel scattered. But one day you'll look back and see the pattern — and it'll be beautiful. 🌌",
+          },
+          {
+            q: "Maps are drawn by those who got lost first.",
+            p: "Your confusion now is the map for your clarity later. Every wrong turn teaches you something true. 🗺️",
+          },
+          {
+            q: "Dawn can't decide if it's night or day — and it's gorgeous.",
+            p: "You're caught between feelings? That means you're real. That means you're human. That means you're extraordinary. 🌅",
+          },
+          {
+            q: "Roots grow in the dark long before flowers bloom in the light.",
+            p: "The growth is happening even when you can't see it. Even when it feels like nothing makes sense. Trust the process. 🌿",
+          },
+          {
+            q: "The ocean doesn't question its tides.",
+            p: "Your feelings will ebb and flow. That's not indecisiveness — that's nature. Your nature. And it's beautiful. 🌊",
+          },
+          {
+            q: "Every great discovery started with uncertainty.",
+            p: "Not knowing is scary. But it's also the beginning of every great story. Ours included. 🔬",
+          },
+          {
+            q: "Clouds are just water that hasn't decided where to fall.",
+            p: "Take your time deciding. I'd rather wait forever for your certain yes than rush you into an uncertain one. ☁️",
+          },
+          {
+            q: "Silence between thunder is where clarity lives.",
+            p: "Between the noise and chaos, there are quiet moments of knowing. Listen to those. They'll guide you. 🤫",
+          },
+          {
+            q: "A cocoon looks like nothing is happening — but everything is.",
+            p: "You feel stuck? No. You're transforming. And when you emerge, even you won't believe what you've become. 🦋",
+          },
+          {
+            q: "Mirrors reflect — they don't judge.",
+            p: "Look at yourself without judgment right now. What I see is someone brave enough to sit with uncertainty. That's rare. 🪞",
+          },
+        ],
+        hopeful: [
+          {
+            q: "A million tiny dots, and somehow they made something perfect.",
+            p: "That flicker of hope you feel? It's not naive — it's brave. I'll rebuild your trust one tiny action at a time. I promise. 🌤️",
+          },
+          {
+            q: "Every sunrise is proof that new beginnings exist.",
+            p: "We get a fresh start every single morning. And I want to spend every one of mine proving I've changed. 🌅",
+          },
+          {
+            q: "Seeds break open before they bloom.",
+            p: "We cracked. But that crack is where the new growth starts. I can already feel the roots taking hold. 🌱",
+          },
+          {
+            q: "After the longest night comes the most brilliant dawn.",
+            p: "We've been through the darkest part. The light is coming — and it's going to be blinding in the best way. ☀️",
+          },
+          {
+            q: "Bridges are built by people who refused to accept the gap.",
+            p: "The distance between us right now? I'm building a bridge across it. Plank by plank. Day by day. 🌉",
+          },
+          {
+            q: "Rainbows only appear after it rains.",
+            p: "Every tear, every fight, every hard moment — they were all building toward something colorful. I can see it forming. 🌈",
+          },
+          {
+            q: "The first flower of spring doesn't wait for all the snow to melt.",
+            p: "Your hope is that first flower. Brave. Early. Beautiful. And it gives me the courage to hope too. 🌸",
+          },
+          {
+            q: "Butterflies remember being caterpillars — but they still fly.",
+            p: "Our past doesn't have to anchor us. We can remember, learn, and still soar. Together. 🦋",
+          },
+          {
+            q: "A single candle can light an entire room.",
+            p: "That tiny flame of hope in your heart? It's lighting up my entire world right now. Don't let it go out. 🕯️",
+          },
+          {
+            q: "Tides always return.",
+            p: "No matter how far the water pulls back, it always comes rushing back to shore. That's us. That's always been us. 🌊",
+          },
+          {
+            q: "Morning glories open because they trust the sun will come.",
+            p: "Your hope is an act of trust. And I will spend every day being worthy of it. 🌺",
+          },
+          {
+            q: "Broken bones heal stronger than before.",
+            p: "What we've been through? It's not our weakness. It's going to be our greatest strength. I believe that completely. 💪",
+          },
+          {
+            q: "Stars are born from collapsing clouds.",
+            p: "Our collapse isn't the end of our story. It's the birth of something luminous. Something new. ✨",
+          },
+          {
+            q: "The phoenix was just a bird — until it burned.",
+            p: "We had to burn to become what we're meant to be. And what rises from these ashes? It's going to be legendary. 🔥",
+          },
+          {
+            q: "Gardens don't grow from perfect conditions — they grow from care.",
+            p: "We don't need to be perfect. We just need to show up, water the soil, and choose each other. Every day. 🌻",
+          },
+          {
+            q: "Second chances are first chances with wisdom.",
+            p: "This isn't a do-over. It's an upgrade. We know better now. And knowing better means doing better. 🔄",
+          },
+          {
+            q: "Lighthouses don't run to ships — they stand and shine.",
+            p: "I'll be your lighthouse. Steady. Consistent. Always shining in your direction. Just look for the light. 🏗️",
+          },
+          {
+            q: "The best chapters are never the first ones.",
+            p: "Chapter one was beautiful. But chapter two? With everything we've learned? It's going to be breathtaking. 📖",
+          },
+          {
+            q: "Kintsugi fills cracks with gold — because breakage is beautiful.",
+            p: "Our cracks deserve gold, not glue. What if our scars become the most beautiful part of our story? ✨",
+          },
+          {
+            q: "Tomorrow hasn't been written yet.",
+            p: "Whatever happened yesterday — it's ink on old pages. Tomorrow is still a blank canvas. Let's paint it together. 🎨",
+          },
+          {
+            q: "Acorns don't look like oak trees — but they become them.",
+            p: "What we are right now doesn't look like what we'll become. But the potential? It's enormous. 🌳",
+          },
+          {
+            q: "Every expert was once a beginner.",
+            p: "We're beginners at being better. But we'll get good at it. I'll practice every single day. 📚",
+          },
+          {
+            q: "The crack is where the light gets in.",
+            p: "Our imperfections aren't darkness — they're windows. And through them, something incredible is pouring in. 💡",
+          },
+          {
+            q: "Compasses always find north — even after spinning.",
+            p: "We've been spinning. But I can feel us settling. Finding our direction. Finding our way back. 🧭",
+          },
+          {
+            q: "Even the tiniest spark can start a bonfire.",
+            p: "Your willingness to hope — even a little — is the spark. And I'll feed that flame with everything I have. 🔥",
+          },
+          {
+            q: "Rivers always reach the ocean.",
+            p: "No matter how many turns, how many obstacles — we'll get there. I know we will. Because that's what rivers do. 🏞️",
+          },
+          {
+            q: "The darkest soil grows the brightest flowers.",
+            p: "Everything hard we've been through? It's just enriching the soil. What blooms from this will be stunning. 🌷",
+          },
+          {
+            q: "Music sounds sweetest after silence.",
+            p: "Our quiet period? It's just the rest before the most beautiful melody of our lives. 🎵",
+          },
+          {
+            q: "Diamonds are just coal that never gave up.",
+            p: "We're under pressure. But we're not breaking — we're crystallizing into something precious. 💎",
+          },
+          {
+            q: "New moons are invisible — but they're still whole.",
+            p: "Even when you can't see the hope, it's there. Full and whole and waiting. Just like my love for you. 🌑",
+          },
+        ],
+        loved: [
+          {
+            q: "Walking together through the rain — and still choosing each other.",
+            p: "The fact that you can still feel love after everything? That's your superpower. And I will spend the rest of my days making sure you never forget it. 💖",
+          },
+          {
+            q: "Home isn't a place. It's the feeling of being next to the right person.",
+            p: "Every room feels empty without you. Every silence feels wrong without your voice. You are my home. Always. 🏡",
+          },
+          {
+            q: "Two souls don't find each other by accident.",
+            p: "Out of 8 billion people, I found you. That's not coincidence — that's fate telling me not to mess this up. And I'm finally listening. 🌍",
+          },
+          {
+            q: "Love isn't about being perfect — it's about being real.",
+            p: "I was never perfect. But my love for you? That's the realest thing about me. And it hasn't wavered for a second. 💕",
+          },
+          {
+            q: "The heart knows things the mind can't explain.",
+            p: "My brain might stumble over apologies, but my heart? It knows exactly what it wants. You. Only you. Always you. ❤️",
+          },
+          {
+            q: "Together is the most beautiful word in any language.",
+            p: "Apart, we're just two people. Together, we're everything. I don't want to be 'just a person' anymore. 🤝",
+          },
+          {
+            q: "Love letters never go out of style.",
+            p: "In a world of texts and DMs, I built you an entire website. Because you deserve more than a notification — you deserve a monument. 💌",
+          },
+          {
+            q: "The right person makes you forget why you were afraid.",
+            p: "You make my fears look silly. My walls look pointless. My pride look small. You make me brave. 🦁",
+          },
+          {
+            q: "In a room full of art, I'd still stare at you.",
+            p: "Every masterpiece on this page? Beautiful. But not one of them holds a candle to the way you look when you laugh. 🎨",
+          },
+          {
+            q: "Love is not what you say — it's what you do every day after.",
+            p: "Words are easy. Actions take work. And I'm ready to put in the work — the real, everyday, unglamorous work of loving you right. 🔨",
+          },
+          {
+            q: "You are the poem I never knew how to write.",
+            p: "Every beautiful thing I've ever read — none of them captured what I feel when I look at you. You're beyond language. ✍️",
+          },
+          {
+            q: "Two imperfect people refusing to give up on each other.",
+            p: "That's us. Messy, flawed, stubborn, and absolutely unwilling to let go. And that's the most romantic thing I know. 💪",
+          },
+          {
+            q: "Your hand in mine is my favorite feeling in the universe.",
+            p: "I miss your touch. Your warmth. The way our fingers interlock like they were designed for each other. 🤲",
+          },
+          {
+            q: "I didn't fall in love — I walked in with both eyes open.",
+            p: "I chose you. Deliberately. Consciously. Fully. And I'm choosing you again right now. And tomorrow. And forever. 👁️",
+          },
+          {
+            q: "You are the reason I believe in trying again.",
+            p: "Without you, giving up seemed easy. With you, trying again feels like the only thing worth doing. 🔄",
+          },
+          {
+            q: "A garden of a thousand flowers — and my eyes still find yours.",
+            p: "In any crowd, any city, any lifetime — my heart would recognize yours. It always has. 🌹",
+          },
+          {
+            q: "Some people search their whole lives for what I have standing in front of me.",
+            p: "I almost lost the rarest thing in the world because I forgot to treasure it. I see you now. I really see you. 💎",
+          },
+          {
+            q: "You're not just someone I love — you're someone I choose.",
+            p: "Love is a feeling. Choosing is a decision. And every morning, every night, every breath — I choose you. 🗳️",
+          },
+          {
+            q: "To be loved by you is to be known.",
+            p: "You know my worst. My ugliest. My weakest. And somehow you're still here. That's not love — that's grace. 🙏",
+          },
+          {
+            q: "The best love stories are written by people who almost lost each other.",
+            p: "This rough patch? It's just the plot twist before the happy ending. And our happy ending is going to be epic. 📕",
+          },
+          {
+            q: "You make ordinary moments feel like they belong in a museum.",
+            p: "Coffee with you. Silence with you. Even fighting with you. It all feels like art. Because it's with you. 🏛️",
+          },
+          {
+            q: "My favorite place in the world is next to you.",
+            p: "Not a beach. Not a mountain. Not anywhere on any map. Just wherever you are. That's my destination. 📍",
+          },
+          {
+            q: "They say love is patient — and mine is still waiting.",
+            p: "However long it takes you to trust me again — I'm here. Patient. Steady. Not going anywhere. ⏳",
+          },
+          {
+            q: "Soulmates aren't perfect — they're persistent.",
+            p: "We stumble. We fall. We hurt each other. But we keep showing up. That's not dysfunction — that's devotion. 💕",
+          },
+          {
+            q: "I don't want easy. I want you.",
+            p: "You're complicated, intense, and challenging. And I wouldn't trade a single ounce of you for anything simpler. 🌪️",
+          },
+          {
+            q: "Every love song was written about someone like you.",
+            p: "Now I get it. Every lyric. Every melody. Every sappy line. They were all trying to describe what I feel. They all fell short. 🎵",
+          },
+          {
+            q: "The universe conspired to put us in the same lifetime.",
+            p: "What are the odds? The exact same planet, same era, same city, same life? That's not luck. That's destiny being stubborn. 🌌",
+          },
+          {
+            q: "You don't complete me — you inspire me to complete myself.",
+            p: "You make me want to grow. Not because I'm not enough, but because you make 'better' feel possible. 🌱",
+          },
+          {
+            q: "Holding you feels like coming home after the longest journey.",
+            p: "I've been wandering. Lost. Stumbling. But the second I'm back in your arms, everything makes sense again. 🏠",
+          },
+          {
+            q: "I loved you then. I love you now. I'll love you when.",
+            p: "Past, present, future — it's always been you. It will always be you. This is the one thing in my life I'm absolutely certain of. ♾️",
+          },
+        ],
+      };
+
+      // Cache search results so we don't re-fetch the same keyword
+      const emoIdCache = {};
+
+      async function triggerEmotion(btn) {
+        const emo = btn.dataset.emo;
+        const card = document.getElementById("emoCard");
+        const img = document.getElementById("emoArtImg");
+        const loading = document.getElementById("emoLoading");
+        const titleEl = document.getElementById("emoArtTitle");
+        const artistEl = document.getElementById("emoArtArtist");
+        const quoteEl = document.getElementById("emoQuote");
+        const pamperEl = document.getElementById("emoPamper");
+
+        // Mark button
+        document
+          .querySelectorAll(".emo-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        btn.classList.add("visited");
+        emoVisited.add(emo);
+
+        // Fill pip
+        const pip = document.querySelector(`.emo-pip[data-pip="${emo}"]`);
+        if (pip) pip.classList.add("filled");
+        document.getElementById("emoProgressLabel").textContent =
+          emoVisited.size + " of 5 felt";
+
+        // Pick random quote
+        const quotes = emoQuotes[emo];
+        const randQ = quotes[Math.floor(Math.random() * quotes.length)];
+        quoteEl.textContent = randQ.q;
+        pamperEl.textContent = randQ.p;
+
+        // Show card with loading
+        card.classList.remove("active");
+        void card.offsetHeight;
+        card.classList.add("active");
+        loading.classList.remove("hidden");
+        loading.querySelector("span").textContent =
+          "Finding you a masterpiece... 🎨";
+        img.style.opacity = "0";
+
+        // Pick random search keyword for this emotion
+        const terms = emoSearchTerms[emo];
+        const term = terms[Math.floor(Math.random() * terms.length)];
+        const cacheKey = emo + ":" + term;
+
+        try {
+          // Step 1: Search Met API for objectIDs (cache results)
+          let objectIDs;
+          if (emoIdCache[cacheKey]) {
+            objectIDs = emoIdCache[cacheKey];
+          } else {
+            const searchRes = await fetch(
+              `https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&isPublicDomain=true&q=${encodeURIComponent(
+                term
+              )}`
+            );
+            const searchData = await searchRes.json();
+            objectIDs = searchData.objectIDs || [];
+            if (objectIDs.length > 0) emoIdCache[cacheKey] = objectIDs;
+          }
+
+          if (objectIDs.length === 0) throw new Error("No results");
+
+          // Step 2: Pick a random objectID and fetch its details
+          // Try up to 3 times to find one with a good image
+          let artwork = null;
+          for (let attempt = 0; attempt < 3; attempt++) {
+            const randId =
+              objectIDs[Math.floor(Math.random() * objectIDs.length)];
+            const objRes = await fetch(
+              `https://collectionapi.metmuseum.org/public/collection/v1/objects/${randId}`
+            );
+            const objData = await objRes.json();
+            if (objData.primaryImageSmall) {
+              artwork = objData;
+              break;
+            }
+          }
+
+          if (!artwork || !artwork.primaryImageSmall)
+            throw new Error("No image found");
+
+          titleEl.textContent = artwork.title || "Untitled";
+          artistEl.textContent = artwork.artistDisplayName
+            ? `${artwork.artistDisplayName}${
+                artwork.objectDate ? ", " + artwork.objectDate : ""
+              }`
+            : artwork.objectDate || "The Metropolitan Museum of Art";
+
+          img.onload = () => {
+            loading.classList.add("hidden");
+            img.style.opacity = "1";
+          };
+          img.onerror = () => {
+            loading.querySelector("span").textContent =
+              "Art is shy today... but the quote is all yours 💕";
+          };
+          img.src = artwork.primaryImageSmall;
+        } catch (e) {
+          titleEl.textContent = "A Masterpiece In Your Heart";
+          artistEl.textContent = "By: You";
+          loading.querySelector("span").textContent =
+            "Couldn't fetch art, but you're the real masterpiece 🎨";
+        }
+
+        // Check all visited
+        if (emoVisited.size >= 5) {
+          setTimeout(() => {
+            document.getElementById("emoFinalMsg").classList.add("show");
+          }, 3000);
+        }
+      }
+
+      // ═══════════ GAME ═══════════
+      let gameActive = false,
+        gameScore = 0,
+        gameLives = 3,
+        gameTime = 30;
+      let gameInterval, timerInterval, spawnInterval;
+      const canvas = document.getElementById("gameCanvas"),
+        basket = document.getElementById("gameBasket");
+      const scoreEl = document.getElementById("gameScore"),
+        livesEl = document.getElementById("gameLives"),
+        timerEl = document.getElementById("gameTimer");
+      const overlay = document.getElementById("gameOverlay");
+      const goodItems = [
+        "💖",
+        "💗",
+        "💕",
+        "❤️",
+        "🩷",
+        "💘",
+        "🌹",
+        "🧸",
+        "💝",
+        "🍫",
+      ];
+      const badItems = ["💔", "🥀", "😤"];
+      const milestones = [
+        { at: 3, msg: "See? We're not broken yet 🥺" },
+        { at: 6, msg: "You're catching feelings again! 😍" },
+        { at: 10, msg: "Almost there... like us 💕" },
+        { at: 13, msg: "2 more! Don't let go! 💓" },
+      ];
+
+      function startGame() {
+        document.getElementById("gameIntro").style.display = "none";
+        canvas.classList.add("active");
+        overlay.classList.remove("show");
+        gameActive = true;
+        gameScore = 0;
+        gameLives = 3;
+        gameTime = 30;
+        scoreEl.textContent = "0";
+        livesEl.textContent = "♥♥♥";
+        timerEl.textContent = "30";
+        basket.style.left = "calc(50% - 35px)";
+        canvas
+          .querySelectorAll(".game-falling-item,.game-pop,.game-milestone")
+          .forEach((e) => e.remove());
+        timerInterval = setInterval(() => {
+          gameTime--;
+          timerEl.textContent = gameTime;
+          if (gameTime <= 0) endGame(false);
+        }, 1000);
+        spawnInterval = setInterval(spawnItem, 720);
+        gameInterval = setInterval(gameLoop, 30);
+        canvas.addEventListener("mousemove", handleMM);
+        canvas.addEventListener("touchmove", handleTM, { passive: false });
+      }
+      function restartGame() {
+        startGame();
+      }
+      function handleMM(e) {
+        if (!gameActive) return;
+        const r = canvas.getBoundingClientRect();
+        let x = e.clientX - r.left - 35;
+        x = Math.max(0, Math.min(x, r.width - 70));
+        basket.style.left = x + "px";
+      }
+      function handleTM(e) {
+        if (!gameActive) return;
+        e.preventDefault();
+        const r = canvas.getBoundingClientRect();
+        let x = e.touches[0].clientX - r.left - 35;
+        x = Math.max(0, Math.min(x, r.width - 70));
+        basket.style.left = x + "px";
+      }
+      function spawnItem() {
+        if (!gameActive) return;
+        const it = document.createElement("div");
+        it.className = "game-falling-item";
+        const bad = Math.random() < 0.2;
+        it.dataset.bad = bad ? "1" : "0";
+        it.textContent = bad
+          ? badItems[Math.floor(Math.random() * badItems.length)]
+          : goodItems[Math.floor(Math.random() * goodItems.length)];
+        const cw = canvas.getBoundingClientRect().width;
+        it.style.left = Math.random() * (cw - 40) + 10 + "px";
+        it.style.top = "50px";
+        it.dataset.speed = (2.5 + Math.random() * 2.5).toFixed(1);
+        canvas.appendChild(it);
+      }
+      function gameLoop() {
+        if (!gameActive) return;
+        const items = canvas.querySelectorAll(".game-falling-item");
+        const bR = basket.getBoundingClientRect();
+        const cR = canvas.getBoundingClientRect();
+        items.forEach((item) => {
+          let t = parseFloat(item.style.top);
+          t += parseFloat(item.dataset.speed);
+          item.style.top = t + "px";
+          const iR = item.getBoundingClientRect();
+          if (
+            iR.bottom >= bR.top &&
+            iR.top <= bR.bottom &&
+            iR.right >= bR.left &&
+            iR.left <= bR.right
+          ) {
+            if (item.dataset.bad === "1") {
+              gameLives--;
+              showPop(item, "−1 ♥", true);
+              livesEl.textContent = "♥".repeat(Math.max(gameLives, 0));
+              if (gameLives <= 0) endGame(false);
+            } else {
+              gameScore++;
+              scoreEl.textContent = gameScore;
+              showPop(item, "+1 💖", false);
+              checkMs();
+              if (gameScore >= 15) endGame(true);
+            }
+            item.remove();
+            return;
+          }
+          if (t > cR.height) item.remove();
+        });
+      }
+      function showPop(item, text, bad) {
+        const p = document.createElement("div");
+        p.className = "game-pop";
+        p.textContent = text;
+        p.style.left = item.style.left;
+        p.style.top = parseFloat(item.style.top) - 20 + "px";
+        if (bad) p.style.color = "#e53935";
+        canvas.appendChild(p);
+        setTimeout(() => p.remove(), 800);
+      }
+      function checkMs() {
+        const m = milestones.find((m) => m.at === gameScore);
+        if (m) {
+          const el = document.createElement("div");
+          el.className = "game-milestone";
+          el.textContent = m.msg;
+          canvas.appendChild(el);
+          setTimeout(() => el.remove(), 1800);
+        }
+      }
+      function endGame(won) {
+        gameActive = false;
+        clearInterval(timerInterval);
+        clearInterval(spawnInterval);
+        clearInterval(gameInterval);
+        canvas
+          .querySelectorAll(".game-falling-item")
+          .forEach((e) => e.remove());
+        const t = document.getElementById("gameOverTitle"),
+          msg = document.getElementById("gameOverMsg"),
+          em = document.getElementById("gameOverEmoji"),
+          sec = document.getElementById("gameOverSecret");
+        if (won) {
+          em.textContent = "🎉";
+          t.textContent = "You Caught Every Piece!";
+          msg.textContent = `${gameScore} hearts in ${30 - gameTime}s 🏆`;
+          sec.textContent =
+            "🔓 Just like this game, I know I've dropped the ball. But you just proved that when you care enough, nothing falls through. I care enough. Let me prove it. Now scroll down... please. 🥺💕";
+        } else {
+          em.textContent = gameLives <= 0 ? "💔" : "⏰";
+          t.textContent =
+            gameLives <= 0 ? "Too Many Heartbreaks" : "Time Ran Out";
+          msg.textContent = `You caught ${gameScore}/15 hearts`;
+          sec.textContent =
+            "But that's okay — even when we stumble, we can always try again. That's all I'm asking for. One more try. 💕";
+        }
+        overlay.classList.add("show");
+      }
+
+      // ─── LEAVE BUTTON ───
+      const leaveBtn = document.getElementById("btnLeave"),
+        leaveHint = document.getElementById("leaveHint");
+      let lC = 0;
+      const lM = [
+        "The button is too scared to work... just like me right now 🥺",
+        "It ran away! Even a button knows we belong together 💕",
+        "It keeps moving because even code can tell this isn't over 😭",
+        "Please... the button literally can't handle this either 🥲",
+        "Okay it gave up. But I won't. I'll never give up on us.",
+        "It's gone... but I'm still here. And I always will be. 💖",
+      ];
+      leaveBtn.addEventListener("mouseover", function () {
+        if (lC < 5) {
+          const x = Math.random() * (window.innerWidth - 200),
+            y = Math.random() * (window.innerHeight - 60);
+          this.style.position = "fixed";
+          this.style.left = x + "px";
+          this.style.top = y + "px";
+          this.style.zIndex = "999";
+          leaveHint.textContent = lM[lC];
+          lC++;
+        } else {
+          this.style.display = "none";
+          leaveHint.textContent = lM[5];
+        }
+      });
+      leaveBtn.addEventListener("click", function () {
+        const x = Math.random() * (window.innerWidth - 200),
+          y = Math.random() * (window.innerHeight - 60);
+        this.style.position = "fixed";
+        this.style.left = x + "px";
+        this.style.top = y + "px";
+        this.style.zIndex = "999";
+        leaveHint.textContent = lM[Math.min(lC, 5)];
+        lC++;
+        if (lC > 5) this.style.display = "none";
+      });
+
+      // ─── SHE STAYED ───
+      function sheStayed() {
+        const cel = document.getElementById("celebration");
+        const surprise = document.getElementById("surpriseSection");
+        cel.classList.add("active");
+        surprise.classList.add("active");
+        cel.scrollIntoView({ behavior: "smooth" });
+        const colors = [
+          "#f48fb1",
+          "#ec407a",
+          "#d4a373",
+          "#fce4ec",
+          "#ff80ab",
+          "#ff4081",
+          "#ffd6e0",
+          "#fff0f3",
+        ];
+        for (let i = 0; i < 120; i++) {
+          setTimeout(() => {
+            const c = document.createElement("div");
+            c.className = "confetti-piece";
+            c.style.left = Math.random() * 100 + "vw";
+            c.style.background =
+              colors[Math.floor(Math.random() * colors.length)];
+            c.style.width = 6 + Math.random() * 10 + "px";
+            c.style.height = 6 + Math.random() * 10 + "px";
+            c.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
+            c.style.animationDuration = 2 + Math.random() * 3 + "s";
+            c.style.animationDelay = Math.random() * 0.5 + "s";
+            document.body.appendChild(c);
+            setTimeout(() => c.remove(), 5000);
+          }, i * 30);
+        }
+      }
+    </script>
+  </body>
+</html>
