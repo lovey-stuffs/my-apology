@@ -2085,7 +2085,7 @@
           },
           {
             q: "Passion and fury share the same heartbeat.",
-            p: "You feel angry because you feel everything — deeply, fully, completely. That's not a flaw. That's why I fell in love with you. ❤️‍🔥",
+            p: "You feel angry because you feel everything — deeply, fully, completely. That's not a flaw. That's why I fell in love with you. 💗",
           },
           {
             q: "The hottest fires leave behind the purest gold.",
@@ -2097,7 +2097,7 @@
           },
           {
             q: "Broken plates make the most beautiful mosaics.",
-            p: "Every shattered moment between us? I want to pick up every piece and turn it into something beautiful. With you. 🪞",
+            p: "Every shattered moment between us? I want to pick up every piece and turn it into something beautiful. With you. 💎",
           },
           {
             q: "You burn bright because you're made of stars.",
@@ -2141,7 +2141,7 @@
           },
           {
             q: "Crashing waves polish the roughest stones smooth.",
-            p: "Every wave of your anger is smoothing out my rough edges. I'm becoming better because of you — even in your fury. 🪨",
+            p: "Every wave of your anger is smoothing out my rough edges. I'm becoming better because of you — even in your fury. 🌊",
           },
         ],
         sad: [
@@ -2263,7 +2263,7 @@
           },
           {
             q: "Gentle hearts carry the heaviest weight.",
-            p: "You carry everyone's feelings — including mine. It's time someone carried yours. Let me. Please. 🫂",
+            p: "You carry everyone's feelings — including mine. It's time someone carried yours. Let me. Please. 🤗",
           },
           {
             q: "A butterfly's cocoon is just a beautiful breakdown.",
@@ -2361,7 +2361,7 @@
           },
           {
             q: "The most honest answer is sometimes 'I don't know.'",
-            p: "You don't have to decide anything today. Not about us, not about anything. Just breathe. That's enough for now. 🫁",
+            p: "You don't have to decide anything today. Not about us, not about anything. Just breathe. That's enough for now. 🌬️",
           },
           {
             q: "Kaleidoscopes are beautiful because nothing stays still.",
@@ -2425,7 +2425,7 @@
           },
           {
             q: "Mirrors reflect — they don't judge.",
-            p: "Look at yourself without judgment right now. What I see is someone brave enough to sit with uncertainty. That's rare. 🪞",
+            p: "Look at yourself without judgment right now. What I see is someone brave enough to sit with uncertainty. That's rare. ✨",
           },
         ],
         hopeful: [
@@ -2806,7 +2806,7 @@
         "💗",
         "💕",
         "❤️",
-        "🩷",
+        "💞",
         "💘",
         "🌹",
         "🧸",
@@ -2824,6 +2824,7 @@
       function startGame() {
         document.getElementById("gameIntro").style.display = "none";
         canvas.classList.add("active");
+        canvas.scrollIntoView({ behavior: "smooth", block: "center" });
         overlay.classList.remove("show");
         gameActive = true;
         gameScore = 0;
