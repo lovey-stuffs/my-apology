@@ -9,6 +9,49 @@
       rel="stylesheet"
     />
     <style>
+      /* ─── MOBILE BLOCKER ─── */
+      .mobile-blocker {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background: linear-gradient(135deg, #fce4ec, #f8bbd0, #f48fb1);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 40px;
+      }
+      .mobile-blocker .mb-emoji {
+        font-size: 64px;
+        margin-bottom: 24px;
+      }
+      .mobile-blocker h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 28px;
+        color: #880e4f;
+        margin-bottom: 16px;
+        line-height: 1.3;
+      }
+      .mobile-blocker p {
+        font-family: "Caveat", cursive;
+        font-size: 22px;
+        color: #ad1457;
+        max-width: 340px;
+        line-height: 1.5;
+      }
+      .mobile-blocker .mb-heart {
+        margin-top: 30px;
+        font-size: 32px;
+        animation: gentlePulse 2s infinite;
+      }
+      .mobile-blocker.active {
+        display: flex;
+      }
+      .mobile-blocker.active ~ * {
+        display: none !important;
+      }
+
       *,
       *::before,
       *::after {
@@ -1385,6 +1428,18 @@
     </style>
   </head>
   <body>
+    <div class="mobile-blocker" id="mobileBlocker">
+      <div class="mb-emoji">🥺💻</div>
+      <h2>Hey, I told you to<br />open this on a laptop!</h2>
+      <p>This was made to be experienced on a bigger screen... trust me, it's worth it. Go grab your laptop and come back, okay?</p>
+      <div class="mb-heart">💕</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/ismobilejs@1.1.1/dist/isMobile.min.js"></script>
+    <script>
+      if (isMobile(window.navigator).any) {
+        document.getElementById("mobileBlocker").classList.add("active");
+      }
+    </script>
     <div class="scroll-progress" id="scrollProgress"></div>
     <div class="hearts-bg" id="heartsBg"></div>
 
