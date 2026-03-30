@@ -1434,9 +1434,10 @@
       <p>This was made to be experienced on a bigger screen... trust me, it's worth it. Go grab your laptop and come back, okay?</p>
       <div class="mb-heart">💕</div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/ismobilejs@1.1.1/dist/isMobile.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.4.5/mobile-detect.min.js"></script>
     <script>
-      if (isMobile(window.navigator).any) {
+      var md = new MobileDetect(window.navigator.userAgent);
+      if (md.mobile()) {
         document.getElementById("mobileBlocker").classList.add("active");
       }
     </script>
