@@ -1084,7 +1084,6 @@
         );
         text-align: center;
         position: relative;
-        overflow: hidden;
       }
       .stay-section::before {
         content: "";
@@ -1104,7 +1103,6 @@
         padding: 50px 40px;
         box-shadow: 0 20px 60px rgba(236, 64, 122, 0.1);
         position: relative;
-        overflow: hidden;
       }
       .stay-card::before {
         content: "";
@@ -1301,12 +1299,9 @@
         margin-bottom: 8px;
       }
       .scroll-surprise .scroll-arrow {
-        font-size: 28px;
-        animation: bounceDown 1.5s infinite;
-      }
-      @keyframes bounceDown {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(10px); }
+        margin: 0 auto;
+        border-color: var(--hot-pink);
+        animation: bounce 2s infinite;
       }
       .celebration.active .scroll-surprise {
         display: block;
@@ -1315,11 +1310,7 @@
         display: none;
         padding: 80px 20px 40px;
         text-align: center;
-        background: linear-gradient(
-          180deg,
-          var(--petal),
-          var(--soft-pink)
-        );
+        background: linear-gradient(180deg, var(--petal), var(--soft-pink));
       }
       .surprise-section.active {
         display: block;
@@ -1463,8 +1454,7 @@
           <h3>For Not Changing Sooner</h3>
           <p>
             I know sorry means nothing without action. I'm not just saying it —
-            I'm committing to being the person you fell in love with, and then
-            some.
+            I'm committing to being the person you'll fell in love with.
           </p>
         </div>
       </div>
@@ -1485,7 +1475,7 @@
           </div>
           <div class="photo-caption">
             <span class="tag">you are</span>
-            <h3>My Favorite Place to be</h3>
+            <h3>My Favorite Place to be 🏠</h3>
             <p>
               When you're around, that place becomes my comforting home. and so
               I want your hug to be my permanent address.
@@ -1498,7 +1488,7 @@
           </div>
           <div class="photo-caption">
             <span class="tag">you smile is</span>
-            <h3>Only thing I crave for most</h3>
+            <h3>Only thing I crave for most 😄</h3>
             <p>
               When everything is falling apart, seeing you smile is the only
               blessing I'll ask from god. And I want to see that smile always,
@@ -1512,7 +1502,7 @@
           </div>
           <div class="photo-caption">
             <span class="tag">Without you</span>
-            <h3>My life is just blank space</h3>
+            <h3>My life is just blank space 😔</h3>
             <p>
               You are like raninbow pallatte to my blank canvas and I want to
               preserve those coulours forever.
@@ -1637,9 +1627,12 @@
       <p class="cel-sub">
         I love you. More than this website could ever say. 🥹
       </p>
-      <div class="scroll-surprise" onclick="document.getElementById('surpriseSection').scrollIntoView({behavior:'smooth'})">
+      <div
+        class="scroll-surprise"
+        onclick="document.getElementById('surpriseSection').scrollIntoView({behavior:'smooth'})"
+      >
         <p>Scroll for a surprise 🎁</p>
-        <div class="scroll-arrow">↓</div>
+        <div class="scroll-arrow"></div>
       </div>
     </div>
 
@@ -1650,40 +1643,58 @@
         <p>~ for the artist in you ~</p>
       </div>
 
-      <section class="emotion-section" style="display:block; padding-top:0;">
-        <h2 class="section-title">
-          What Are You<br />Feeling Right Now? 🎨
-        </h2>
+      <section class="emotion-section" style="display: block; padding-top: 0">
+        <h2 class="section-title">What Are You<br />Feeling Right Now? 🎨</h2>
         <div class="emotion-wrapper">
           <div class="emotion-intro">
             <p>
               I know you feel things deeper than most people — and that's one of
               the most beautiful things about you. So tap on whatever you're
               feeling right now. Each emotion will show you
-              <em>a masterpiece that mirrors it</em>, and a little something from
-              me to remind you — every feeling you have is valid, and I'm here for
-              all of them. Tap again for a new artwork!
+              <em>a masterpiece that mirrors it</em>, and a little something
+              from me to remind you — every feeling you have is valid, and I'm
+              here for all of them. Tap again for a new artwork!
             </p>
           </div>
 
           <div class="emotion-buttons" id="emotionBtns">
-            <button class="emo-btn" data-emo="angry" onclick="triggerEmotion(this)">
+            <button
+              class="emo-btn"
+              data-emo="angry"
+              onclick="triggerEmotion(this)"
+            >
               <span class="emo-icon">😤</span> Angry
               <span class="emo-check">✓</span>
             </button>
-            <button class="emo-btn" data-emo="sad" onclick="triggerEmotion(this)">
+            <button
+              class="emo-btn"
+              data-emo="sad"
+              onclick="triggerEmotion(this)"
+            >
               <span class="emo-icon">😢</span> Sad
               <span class="emo-check">✓</span>
             </button>
-            <button class="emo-btn" data-emo="confused" onclick="triggerEmotion(this)">
+            <button
+              class="emo-btn"
+              data-emo="confused"
+              onclick="triggerEmotion(this)"
+            >
               <span class="emo-icon">😕</span> Confused
               <span class="emo-check">✓</span>
             </button>
-            <button class="emo-btn" data-emo="hopeful" onclick="triggerEmotion(this)">
+            <button
+              class="emo-btn"
+              data-emo="hopeful"
+              onclick="triggerEmotion(this)"
+            >
               <span class="emo-icon">🌤️</span> Hopeful
               <span class="emo-check">✓</span>
             </button>
-            <button class="emo-btn" data-emo="loved" onclick="triggerEmotion(this)">
+            <button
+              class="emo-btn"
+              data-emo="loved"
+              onclick="triggerEmotion(this)"
+            >
               <span class="emo-icon">💖</span> Loved
               <span class="emo-check">✓</span>
             </button>
@@ -1712,7 +1723,9 @@
             <div class="emo-pip" data-pip="confused"></div>
             <div class="emo-pip" data-pip="hopeful"></div>
             <div class="emo-pip" data-pip="loved"></div>
-            <span class="emo-progress-label" id="emoProgressLabel">0 of 5 felt</span>
+            <span class="emo-progress-label" id="emoProgressLabel"
+              >0 of 5 felt</span
+            >
           </div>
 
           <div class="emo-final-msg" id="emoFinalMsg">
@@ -1720,9 +1733,9 @@
             <h3>You Felt Everything — And That's Art</h3>
             <p>
               Anger. Sadness. Confusion. Hope. Love. You carry all of it, and
-              somehow you still show up in this world with grace. That's not just
-              strength — that's the most beautiful masterpiece I've ever seen. And
-              it's you.
+              somehow you still show up in this world with grace. That's not
+              just strength — that's the most beautiful masterpiece I've ever
+              seen. And it's you.
             </p>
             <p class="final-sig">
               Every emotion you have is safe with me. Always. 🤍
@@ -1733,6 +1746,9 @@
     </div>
 
     <script>
+      window.history.scrollRestoration = "manual";
+      window.scrollTo(0, 0);
+
       // ─── ENTRANCE ───
       function openSite() {
         document.getElementById("entrance").classList.add("hidden");
@@ -2902,35 +2918,37 @@
         "Okay it gave up. But I won't. I'll never give up on us.",
         "It's gone... but I'm still here. And I always will be. 💖",
       ];
-      leaveBtn.addEventListener("mouseover", function () {
-        if (lC < 5) {
-          const x = Math.random() * (window.innerWidth - 200),
-            y = Math.random() * (window.innerHeight - 60);
-          this.style.position = "fixed";
-          this.style.left = x + "px";
-          this.style.top = y + "px";
-          this.style.zIndex = "999";
-          leaveHint.textContent = lM[lC];
-          lC++;
-        } else {
-          this.style.display = "none";
-          leaveHint.textContent = lM[5];
+      function dodgeLeaveBtn(btn) {
+        // Move to body on first dodge so fixed positioning works
+        if (btn.parentElement !== document.body) {
+          document.body.appendChild(btn);
         }
+        const btnW = 240,
+          btnH = 70,
+          pad = 10;
+        const maxX = window.innerWidth - btnW - pad;
+        const maxY = window.innerHeight - btnH - pad;
+        const x = Math.max(pad, Math.random() * maxX);
+        const y = Math.max(pad, Math.random() * maxY);
+        btn.style.position = "fixed";
+        btn.style.left = x + "px";
+        btn.style.top = y + "px";
+        btn.style.zIndex = "9999";
+        leaveHint.textContent = lM[lC % lM.length];
+        lC++;
+      }
+      leaveBtn.addEventListener("mouseover", function () {
+        dodgeLeaveBtn(this);
       });
       leaveBtn.addEventListener("click", function () {
-        const x = Math.random() * (window.innerWidth - 200),
-          y = Math.random() * (window.innerHeight - 60);
-        this.style.position = "fixed";
-        this.style.left = x + "px";
-        this.style.top = y + "px";
-        this.style.zIndex = "999";
-        leaveHint.textContent = lM[Math.min(lC, 5)];
-        lC++;
-        if (lC > 5) this.style.display = "none";
+        dodgeLeaveBtn(this);
       });
 
       // ─── SHE STAYED ───
       function sheStayed() {
+        // Remove the leave button
+        const lb = document.getElementById("btnLeave");
+        if (lb) lb.remove();
         const cel = document.getElementById("celebration");
         const surprise = document.getElementById("surpriseSection");
         cel.classList.add("active");
